@@ -279,13 +279,15 @@ const TCDA_NEWS = (() => {
   // ===== 自動判斷頁面 =====
 
   function autoRender() {
-    const path = location.pathname.split('/').pop() || 'index.html';
-    if (path === 'index.html' || path === '') renderIndex();
-    else if (path === 'breaking.html') renderCategory('breaking');
-    else if (path === 'entertainment.html') renderCategory('entertainment');
-    else if (path === 'internet.html') renderCategory('internet');
-    else if (path === 'roblox.html') renderCategory('roblox');
-    else if (path === 'life.html') renderCategory('life');
+    const raw = location.pathname.split('/').pop() || '';
+    // 相容有無 .html 副檔名（Cloudflare Pages Pretty URLs）
+    const path = raw.replace(/\.html$/, '') || 'index';
+    if (path === 'index' || path === '') renderIndex();
+    else if (path === 'breaking') renderCategory('breaking');
+    else if (path === 'entertainment') renderCategory('entertainment');
+    else if (path === 'internet') renderCategory('internet');
+    else if (path === 'roblox') renderCategory('roblox');
+    else if (path === 'life') renderCategory('life');
   }
 
   // ===== 查看計數（用於 article.html 直接呼叫） =====
