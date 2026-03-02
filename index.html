@@ -29,8 +29,8 @@
       <div class="header-right">
         <div class="header-date" id="headerDate"></div>
         <div class="search-box">
-          <input type="text" placeholder="搜尋新聞" />
-          <button>搜尋</button>
+          <input type="text" id="main-search" placeholder="搜尋新聞" onkeydown="if(event.key==='Enter'){var q=this.value.trim();if(q)window.location.href='search.html?q='+encodeURIComponent(q);}"/>
+          <button onclick="var q=document.getElementById('main-search').value.trim();if(q)window.location.href='search.html?q='+encodeURIComponent(q);">搜尋</button>
         </div>
       </div>
     </div>
