@@ -318,4 +318,9 @@ const TCDA_NEWS = (() => {
   return { fetchNews, filterByCategory, autoRender, getConfig, getCover, trackView };
 })();
 
-document.addEventListener('DOMContentLoaded', () => { TCDA_NEWS.autoRender(); });
+// 確保無論何時載入都會執行
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => TCDA_NEWS.autoRender());
+} else {
+  TCDA_NEWS.autoRender();
+}
