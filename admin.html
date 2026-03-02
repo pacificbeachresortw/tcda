@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>後台管理 — 吵交集團 TCDA</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Microsoft JhengHei',sans-serif;background:#f0f0f0;color:#111;min-height:100vh}
+a{text-decoration:none;color:inherit}
+#login-screen{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999}
+.login-box{background:#111;border:1px solid #333;border-radius:16px;padding:48px 40px;width:340px;text-align:center}
+.login-title{font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:4px;margin-bottom:6px}
+.login-title em{font-style:italic}
+.login-sub{font-size:11px;color:#555;letter-spacing:2px;margin-bottom:32px}
+.login-box input[type=password]{width:100%;padding:12px 16px;background:#222;border:1px solid #333;border-radius:8px;color:#fff;font-size:14px;outline:none;letter-spacing:2px;margin-bottom:12px;font-family:inherit}
+.login-box input[type=password]:focus{border-color:#fff}
+.btn-login{width:100%;padding:12px;background:#fff;color:#000;border:none;border-radius:8px;font-size:13px;font-weight:800;letter-spacing:2px;cursor:pointer;font-family:inherit;transition:background .2s}
+.btn-login:hover{background:#ddd}
+.login-err{color:#e44;font-size:12px;margin-top:10px;min-height:18px}
+.admin-header{background:#000;color:#fff;padding:0 28px;height:56px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #fff;position:sticky;top:0;z-index:100}
+.admin-logo{font-size:1.1rem;font-weight:900;letter-spacing:3px}
+.admin-logo em{font-style:italic;letter-spacing:4px}
+.admin-badge{background:#fff;color:#000;font-size:10px;font-weight:900;padding:3px 10px;border-radius:20px;letter-spacing:2px;margin-left:12px}
+.btn-logout{background:transparent;color:#666;border:1px solid #333;border-radius:20px;padding:5px 16px;font-size:11px;cursor:pointer;letter-spacing:1px;font-family:inherit;transition:color .2s,border-color .2s}
+.btn-logout:hover{color:#fff;border-color:#fff}
+.admin-body{max-width:960px;margin:0 auto;padding:32px 24px}
+.tab-bar{display:flex;border-bottom:2px solid #111;margin-bottom:28px}
+.tab-btn{padding:10px 24px;font-size:12px;font-weight:800;letter-spacing:2px;cursor:pointer;border:none;background:transparent;color:#888;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:inherit;transition:color .2s,border-color .2s}
+.tab-btn.active{color:#111;border-bottom-color:#111}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.card{background:#fff;border:1px solid #ddd;border-radius:14px;padding:28px;margin-bottom:20px}
+.card-title{font-size:13px;font-weight:800;letter-spacing:2px;color:#111;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
+.form-row{margin-bottom:16px}
+.form-row label{display:block;font-size:11px;font-weight:800;color:#888;letter-spacing:2px;margin-bottom:6px;text-transform:uppercase}
+.form-row input[type=text],.form-row input[type=url],.form-row input[type=datetime-local],.form-row input[type=password],.form-row input[type=file],.form-row select,.form-row textarea{width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:13px;font-family:inherit;color:#111;outline:none;transition:border-color .2s;background:#fafafa}
+.form-row input[type=file]{padding:8px 14px;cursor:pointer}
+.form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:#111;background:#fff}
+.form-row textarea{resize:vertical;min-height:100px;line-height:1.7}
+.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.hint{font-size:11px;color:#aaa;margin-top:4px}
+.checkbox-row{display:flex;align-items:center;gap:10px;padding:10px 0}
+.checkbox-row input[type=checkbox]{width:18px;height:18px;cursor:pointer;accent-color:#111}
+.checkbox-row label{font-size:13px;font-weight:600;color:#333;cursor:pointer;letter-spacing:1px}
+.btn-primary{background:#111;color:#fff;border:none;border-radius:8px;padding:11px 28px;font-size:12px;font-weight:800;letter-spacing:2px;cursor:pointer;font-family:inherit;transition:background .2s}
+.btn-primary:hover{background:#333}
+.btn-primary:disabled{background:#ccc;cursor:not-allowed}
+.btn-success{background:#2e7d32;color:#fff;border:none;border-radius:8px;padding:11px 28px;font-size:12px;font-weight:800;letter-spacing:2px;cursor:pointer;font-family:inherit;transition:background .2s}
+.btn-success:hover{background:#1b5e20}
+.btn-danger{background:transparent;color:#c00;border:1px solid #fcc;border-radius:6px;padding:5px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:1px;transition:background .2s,color .2s}
+.btn-danger:hover{background:#c00;color:#fff;border-color:#c00}
+.btn-sm{background:#f0f0f0;color:#333;border:1px solid #ddd;border-radius:6px;padding:5px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:1px;transition:background .2s}
+.btn-sm:hover{background:#ddd}
+.alert{padding:12px 16px;border-radius:8px;font-size:12px;font-weight:600;letter-spacing:1px;margin-bottom:16px;display:none}
+.alert.show{display:block}
+.alert-success{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+.alert-error{background:#ffebee;color:#c62828;border:1px solid #ef9a9a}
+.alert-info{background:#e3f2fd;color:#1565c0;border:1px solid #90caf9}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid #ddd;border-radius:12px;padding:20px 16px;text-align:center}
+.stat-num{font-size:2rem;font-weight:900;color:#111;margin-bottom:4px}
+.stat-label{font-size:10px;color:#aaa;letter-spacing:2px;text-transform:uppercase}
+.news-mgmt-item{background:#fafafa;border:1px solid #eee;border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:10px}
+.news-mgmt-info{flex:1;min-width:0}
+.news-mgmt-title{font-size:14px;font-weight:700;color:#111;margin-bottom:6px}
+.news-mgmt-meta{font-size:11px;color:#aaa;letter-spacing:1px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.news-mgmt-actions{display:flex;gap:8px;flex-shrink:0;align-items:center}
+.cat-badge{display:inline-block;font-size:9px;font-weight:800;padding:2px 8px;border-radius:20px;background:#111;color:#fff;letter-spacing:2px}
+.headline-badge{display:inline-block;font-size:9px;font-weight:800;padding:2px 8px;border-radius:20px;background:#e44;color:#fff;letter-spacing:1px}
+.settings-tip{background:#fffde7;border:1px solid #ffe082;border-radius:10px;padding:18px 20px;font-size:12px;color:#555;line-height:2;margin-bottom:20px}
+.settings-tip strong{color:#111}
+.settings-tip ol{padding-left:20px;margin-top:8px}
+.settings-tip ol li{margin-bottom:4px}
+.settings-tip a{color:#1565c0;text-decoration:underline}
+.settings-tip code{background:#f5f5f5;padding:1px 6px;border-radius:4px;font-size:11px;color:#333}
+.pw-change-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:end}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid #ddd;border-top-color:#111;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-msg{text-align:center;padding:32px;font-size:13px;color:#aaa;letter-spacing:2px}
+.empty-state{text-align:center;padding:40px;color:#ccc;font-size:13px;letter-spacing:2px}
+.img-slot{background:#fafafa;border:1px solid #e8e8e8;border-radius:10px;padding:16px;margin-bottom:12px}
+.img-slot-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.img-slot-label{font-size:11px;font-weight:800;color:#888;letter-spacing:2px}
+.img-preview-wrap{margin-bottom:10px}
+.img-preview-wrap img{max-height:140px;border-radius:8px;border:1px solid #ddd;display:block}
+.img-status{font-size:11px;color:#aaa;margin-top:4px}
+.download-box{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:10px;padding:16px 20px;margin-top:16px;display:none}
+.download-box p{font-size:12px;color:#2e7d32;margin-bottom:10px;line-height:1.8}
+.download-box strong{display:block;margin-bottom:4px}
+@media(max-width:600px){.form-grid-2,.pw-change-row{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(2,1fr)}.admin-body{padding:20px 14px}.card{padding:20px 16px}}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-title">吵交集團 <em>TCDA</em></div>
+    <div class="login-sub">後台管理系統</div>
+    <input type="password" id="pw-input" placeholder="輸入管理員密碼" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="btn-login" onclick="doLogin()">登入</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
+
+<header class="admin-header">
+  <div style="display:flex;align-items:center">
+    <span class="admin-logo">吵交集團 <em>TCDA</em></span>
+    <span class="admin-badge">ADMIN</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px">
+    <a href="index.html" style="font-size:11px;color:#555;letter-spacing:1px" target="_blank">← 返回網站</a>
+    <button class="btn-logout" onclick="doLogout()">登出</button>
+  </div>
+</header>
+
+<div class="admin-body">
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('publish')">新增新聞</button>
+    <button class="tab-btn" onclick="switchTab('manage')">管理新聞</button>
+    <button class="tab-btn" onclick="switchTab('settings')">系統設定</button>
+  </div>
+
+  <div id="tab-publish" class="tab-panel active">
+    <div id="pub-alert" class="alert"></div>
+    <div class="card">
+      <div class="card-title">新增一則新聞</div>
+      <div class="form-row">
+        <label>新聞標題 *</label>
+        <input type="text" id="f-title" placeholder="輸入新聞標題" maxlength="120"/>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row">
+          <label>新聞分類 *</label>
+          <select id="f-category">
+            <option value="breaking">即時新聞</option>
+            <option value="entertainment">娛樂</option>
+            <option value="internet">網路</option>
+            <option value="roblox">ROBLOX</option>
+            <option value="life">生活</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>發佈時間（留空為現在）</label>
+          <input type="datetime-local" id="f-date"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>新聞摘要</label>
+        <textarea id="f-excerpt" placeholder="一兩句話簡述新聞內容" rows="3"></textarea>
+      </div>
+      <div class="form-row">
+        <label>完整新聞內文</label>
+        <textarea id="f-content" placeholder="詳細新聞內容（每段換行）" rows="8"></textarea>
+      </div>
+      <div class="form-row">
+        <label>新聞圖片（可多張，第一張為封面）</label>
+        <div id="img-list"></div>
+        <button type="button" class="btn-sm" style="margin-top:4px" onclick="addImageSlot()">＋ 新增圖片</button>
+        <div class="hint">直接上傳圖片檔，系統自動上傳至 ImgBB。請先在系統設定填入 ImgBB API Key。</div>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="f-headline"/>
+        <label for="f-headline">設為頭條新聞（顯示於首頁大圖頭條區）</label>
+      </div>
+      <div style="margin-top:22px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <button class="btn-primary" id="btn-submit" onclick="submitNews()">發佈新聞</button>
+        <button class="btn-sm" onclick="clearForm()">清除表單</button>
+        <span id="submit-status" style="font-size:12px;color:#888;display:none"><span class="spinner"></span><span id="submit-msg">處理中...</span></span>
+      </div>
+      <!-- 發佈後顯示下載框 -->
+      <div class="download-box" id="download-box">
+        <strong>新聞已發佈！請下載文章 HTML 並上傳至 Cloudflare Pages</strong>
+        <p>下載後，將檔案放入 <code>news/</code> 資料夾一起上傳至 Cloudflare Pages。<br>
+        上傳後分享連結 <code>https://twcda.com/news/文章ID.html</code>，Discord/IG 就能顯示正確預覽圖片和標題。</p>
+        <button class="btn-success" id="btn-download" onclick="triggerDownload()">⬇ 下載文章 HTML</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-manage" class="tab-panel">
+    <div id="mgmt-alert" class="alert"></div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num" id="st-total">—</div><div class="stat-label">全部新聞</div></div>
+      <div class="stat-card"><div class="stat-num" id="st-breaking">—</div><div class="stat-label">即時新聞</div></div>
+      <div class="stat-card"><div class="stat-num" id="st-headline">—</div><div class="stat-label">頭條</div></div>
+      <div class="stat-card"><div class="stat-num" id="st-today">—</div><div class="stat-label">今日新聞</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>所有新聞</span><button class="btn-sm" onclick="loadManage()">重新整理</button></div>
+      <div id="mgmt-list"><div class="loading-msg"><span class="spinner"></span>載入中...</div></div>
+    </div>
+  </div>
+
+  <div id="tab-settings" class="tab-panel">
+    <div id="cfg-alert" class="alert"></div>
+    <div class="settings-tip">
+      <strong>JSONBin.io 設定</strong>
+      <ol>
+        <li>前往 <a href="https://jsonbin.io" target="_blank">jsonbin.io</a> 免費註冊。</li>
+        <li>建立新 Bin，初始內容：<code>{"news":[]}</code>，按下 Create。</li>
+        <li>從 URL 複製 Bin ID（如 <code>6abc123def456</code>）。</li>
+        <li>右上角頭像 → <strong>API Keys</strong>，複製 <strong>X-Master-Key</strong>。</li>
+      </ol>
+      <strong style="display:block;margin-top:8px">ImgBB 圖片上傳設定</strong>
+      <ol>
+        <li>前往 <a href="https://imgbb.com" target="_blank">imgbb.com</a> 免費註冊。</li>
+        <li>進入 <a href="https://api.imgbb.com" target="_blank">api.imgbb.com</a>，點選 <strong>Get API key</strong>。</li>
+        <li>複製 API Key 貼入下方。</li>
+      </ol>
+    </div>
+    <div class="card">
+      <div class="card-title">API 設定</div>
+      <div class="form-row"><label>JSONBin Bin ID</label><input type="text" id="cfg-binid" placeholder="例：6abc123def456"/></div>
+      <div class="form-row"><label>JSONBin X-Master-Key</label><input type="password" id="cfg-key" placeholder="$2a$10$..."/></div>
+      <div class="form-row">
+        <label>ImgBB API Key（圖片上傳用）</label>
+        <input type="text" id="cfg-imgbb" placeholder="例：a1b2c3d4e5f6..."/>
+        <div class="hint">用於直接上傳圖片檔，免費方案每月無限次。</div>
+      </div>
+      <div class="form-row" style="margin-top:16px;padding-top:16px;border-top:1px solid #eee">
+        <div style="font-size:12px;font-weight:800;color:#111;margin-bottom:8px">GitHub 自動部署（選填）</div>
+        <div style="font-size:11px;color:#888;margin-bottom:12px;line-height:1.8">
+          填寫後發布新聞時自動推送至 GitHub，Cloudflare Pages 會自動重新部署，無需手動上傳。<br>
+          前提：你的 Cloudflare Pages 已連接 GitHub 倉庫。<br>
+          取得 Token：GitHub → Settings → Developer Settings → Personal Access Tokens → 勾選 <code>repo</code> 權限。
+        </div>
+        <div class="form-grid-2" style="gap:10px">
+          <div class="form-row" style="margin:0"><label>GitHub 帳號</label><input type="text" id="cfg-gh-user" placeholder="你的 GitHub 用戶名"/></div>
+          <div class="form-row" style="margin:0"><label>倉庫名稱</label><input type="text" id="cfg-gh-repo" placeholder="例：tcda-website"/></div>
+        </div>
+        <div class="form-row" style="margin-top:10px;margin-bottom:0"><label>Personal Access Token</label><input type="password" id="cfg-gh-token" placeholder="ghp_xxxxxxxxxxxx"/></div>
+      </div>
+      <button class="btn-primary" style="margin-top:16px" onclick="saveConfig()">儲存設定</button>
+      <button class="btn-sm" style="margin-left:10px" onclick="testConnection()">測試 JSONBin 連線</button>
+    </div>
+    <div class="card">
+      <div class="card-title">管理員密碼</div>
+      <div class="pw-change-row">
+        <div class="form-row" style="margin:0"><label>新密碼</label><input type="password" id="new-pw" placeholder="輸入新密碼"/></div>
+        <div class="form-row" style="margin:0"><label>確認新密碼</label><input type="password" id="new-pw2" placeholder="再次輸入"/></div>
+      </div>
+      <button class="btn-primary" style="margin-top:16px" onclick="changePassword()">更新密碼</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY='tcda_jsonbin_config';
+const PW_KEY='tcda_admin_pw';
+const SESSION_KEY='tcda_admin_session';
+const DEFAULT_PW='tcda2026';
+const CAT_LABEL={breaking:'即時',entertainment:'娛樂',internet:'網路',roblox:'ROBLOX',life:'生活'};
+let _lastArticle=null;
+
+function getStoredPw(){return localStorage.getItem(PW_KEY)||DEFAULT_PW;}
+function doLogin(){
+  const v=document.getElementById('pw-input').value;
+  if(v===getStoredPw()){sessionStorage.setItem(SESSION_KEY,'1');document.getElementById('login-screen').style.display='none';loadConfig();loadManage();}
+  else document.getElementById('login-err').textContent='密碼錯誤，請重試。';
+}
+function doLogout(){sessionStorage.removeItem(SESSION_KEY);location.reload();}
+function checkSession(){
+  if(sessionStorage.getItem(SESSION_KEY)!=='1'){document.getElementById('login-screen').style.display='flex';}
+  else{document.getElementById('login-screen').style.display='none';loadConfig();loadManage();}
+}
+function switchTab(id){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  const map={publish:0,manage:1,settings:2};
+  document.querySelectorAll('.tab-btn')[map[id]].classList.add('active');
+  if(id==='manage') loadManage();
+}
+function showAlert(id,type,msg,auto){
+  const el=document.getElementById(id);
+  el.className='alert alert-'+type+' show';
+  el.textContent=msg;
+  if(auto!==false) setTimeout(()=>el.classList.remove('show'),6000);
+}
+function getConfig(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{};}catch{return{};}}
+function loadConfig(){
+  const c=getConfig();
+  const b=document.getElementById('cfg-binid');const k=document.getElementById('cfg-key');const i=document.getElementById('cfg-imgbb');
+  if(b)b.value=c.binId||'';if(k)k.value=c.masterKey||'';if(i)i.value=c.imgbbKey||'';
+}
+function saveConfig(){
+  const binId=document.getElementById('cfg-binid').value.trim();
+  const masterKey=document.getElementById('cfg-key').value.trim();
+  const imgbbKey=document.getElementById('cfg-imgbb').value.trim();
+  if(!binId||!masterKey){showAlert('cfg-alert','error','請填寫 Bin ID 與 Master Key。');return;}
+  const ghUser=(document.getElementById('cfg-gh-user')||{}).value||'';
+  const ghRepo=(document.getElementById('cfg-gh-repo')||{}).value||'';
+  const ghToken=(document.getElementById('cfg-gh-token')||{}).value||'';
+  localStorage.setItem(STORAGE_KEY,JSON.stringify({binId,masterKey,imgbbKey,ghUser:ghUser.trim(),ghRepo:ghRepo.trim(),ghToken:ghToken.trim()}));
+  showAlert('cfg-alert','success','設定已儲存！');
+}
+
+// GitHub 自動推送文章 HTML
+async function pushToGitHub(filename, htmlContent){
+  const c=getConfig();
+  if(!c.ghUser||!c.ghRepo||!c.ghToken) return false;
+  const path='news/'+filename;
+  const apiUrl='https://api.github.com/repos/'+c.ghUser+'/'+c.ghRepo+'/contents/'+path;
+  const b64=btoa(unescape(encodeURIComponent(htmlContent)));
+  const headers={'Authorization':'Bearer '+c.ghToken,'Content-Type':'application/json','Accept':'application/vnd.github+json'};
+  // 先查是否已存在（取 sha）
+  let sha='';
+  try{const ex=await fetch(apiUrl,{headers});if(ex.ok){const ej=await ex.json();sha=ej.sha||'';}}catch{}
+  const body={message:'Add news: '+filename,content:b64};
+  if(sha) body.sha=sha;
+  const r=await fetch(apiUrl,{method:'PUT',headers,body:JSON.stringify(body)});
+  return r.ok;
+}
+async function testConnection(){
+  const c=getConfig();if(!c.binId){showAlert('cfg-alert','error','請先儲存設定。');return;}
+  showAlert('cfg-alert','info','連線測試中...',false);
+  try{
+    const h={};if(c.masterKey)h['X-Master-Key']=c.masterKey;
+    const r=await fetch('https://api.jsonbin.io/v3/b/'+c.binId+'/latest',{headers:h});
+    r.ok?showAlert('cfg-alert','success','連線成功！'):showAlert('cfg-alert','error','連線失敗。');
+  }catch{showAlert('cfg-alert','error','網路錯誤。');}
+}
+function changePassword(){
+  const p1=document.getElementById('new-pw').value,p2=document.getElementById('new-pw2').value;
+  if(!p1){showAlert('cfg-alert','error','請輸入新密碼。');return;}
+  if(p1!==p2){showAlert('cfg-alert','error','兩次密碼不一致。');return;}
+  if(p1.length<4){showAlert('cfg-alert','error','密碼至少 4 個字元。');return;}
+  localStorage.setItem(PW_KEY,p1);
+  document.getElementById('new-pw').value='';document.getElementById('new-pw2').value='';
+  showAlert('cfg-alert','success','密碼已更新！');
+}
+
+let slotCount=0;
+function addImageSlot(){
+  slotCount++;const sid='slot'+slotCount;
+  const div=document.createElement('div');div.className='img-slot';div.id=sid;
+  div.innerHTML='<div class="img-slot-header"><span class="img-slot-label">圖片 '+slotCount+(slotCount===1?' （封面）':'')+'</span><button type="button" class="btn-danger" onclick="document.getElementById(\''+sid+'\').remove()">移除</button></div>'
+    +'<div class="form-row" style="margin-bottom:10px"><label>選擇圖片檔 (JPG/PNG/GIF/WEBP)</label><input type="file" accept="image/*" onchange="previewSlot(this,\''+sid+'\')"/></div>'
+    +'<div class="img-preview-wrap" id="'+sid+'-prev" style="display:none"><img id="'+sid+'-img" alt=""/><div class="img-status" id="'+sid+'-st"></div></div>'
+    +'<div class="form-grid-2" style="gap:10px;margin-top:8px"><div class="form-row" style="margin:0"><label>圖片說明</label><input type="text" id="'+sid+'-cap" placeholder="圖片說明文字"/></div>'
+    +'<div class="form-row" style="margin:0"><label>記者／攝影</label><input type="text" id="'+sid+'-jrn" placeholder="記者姓名或攝影師"/></div></div>'
+    +'<div class="form-row" style="margin-top:10px;margin-bottom:0"><label>圖片來源／版權</label><input type="text" id="'+sid+'-src" placeholder="圖片出處或版權說明"/></div>';
+  document.getElementById('img-list').appendChild(div);
+}
+function previewSlot(input,sid){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    document.getElementById(sid+'-img').src=e.target.result;
+    document.getElementById(sid+'-prev').style.display='block';
+    document.getElementById(sid+'-st').textContent=f.name+' ('+Math.round(f.size/1024)+'KB)';
+  };r.readAsDataURL(f);
+}
+async function uploadToImgBB(base64,key){
+  const fd=new FormData();fd.append('image',base64.includes(',')?base64.split(',')[1]:base64);
+  const r=await fetch('https://api.imgbb.com/1/upload?key='+key,{method:'POST',body:fd});
+  if(!r.ok) throw new Error('ImgBB上傳失敗 '+r.status);
+  return (await r.json()).data.url;
+}
+async function collectImages(){
+  const cfg=getConfig();const key=cfg.imgbbKey||'';const images=[];let idx=0;
+  for(const slot of document.querySelectorAll('#img-list .img-slot')){
+    const sid=slot.id;
+    const imgEl=document.getElementById(sid+'-img');
+    const stEl=document.getElementById(sid+'-st');
+    const cap=(document.getElementById(sid+'-cap')?.value||'').trim();
+    const jrn=(document.getElementById(sid+'-jrn')?.value||'').trim();
+    const src=(document.getElementById(sid+'-src')?.value||'').trim();
+    let url='';
+    if(imgEl&&imgEl.src&&imgEl.src.startsWith('data:')){
+      if(!key) throw new Error('請先在【系統設定】填入 ImgBB API Key 才能上傳圖片');
+      if(stEl)stEl.textContent='上傳圖片 '+(++idx)+'...';
+      document.getElementById('submit-msg').textContent='上傳圖片 '+idx+'...';
+      url=await uploadToImgBB(imgEl.src,key);
+      if(stEl)stEl.textContent='✓ 上傳成功';
+    }
+    if(url||cap||jrn||src) images.push({url,caption:cap,journalist:jrn,source:src});
+  }
+  return images;
+}
+
+async function fetchAllNews(){
+  const c=getConfig();if(!c.binId) return [];
+  try{
+    const h={};if(c.masterKey)h['X-Master-Key']=c.masterKey;
+    const r=await fetch('https://api.jsonbin.io/v3/b/'+c.binId+'/latest',{headers:h});
+    if(!r.ok) return [];
+    const j=await r.json();return j.record&&j.record.news?j.record.news:[];
+  }catch{return [];}
+}
+async function saveAllNews(news){
+  const c=getConfig();
+  if(!c.binId||!c.masterKey) throw new Error('未設定 API');
+  const r=await fetch('https://api.jsonbin.io/v3/b/'+c.binId,{
+    method:'PUT',
+    headers:{'Content-Type':'application/json','X-Master-Key':c.masterKey,'X-Bin-Versioning':'false'},
+    body:JSON.stringify({news})
+  });
+  if(!r.ok) throw new Error('儲存失敗：'+r.status);
+  sessionStorage.removeItem('tcda_news_cache');
+  sessionStorage.removeItem('tcda_news_cache_time');
+}
+
+async function submitNews(){
+  const title=document.getElementById('f-title').value.trim();
+  const category=document.getElementById('f-category').value;
+  if(!title){showAlert('pub-alert','error','請輸入新聞標題。');return;}
+  const c=getConfig();
+  if(!c.binId||!c.masterKey){showAlert('pub-alert','error','請先至【系統設定】完成 API 設定。');return;}
+  const btn=document.getElementById('btn-submit');
+  const st=document.getElementById('submit-status');
+  btn.disabled=true;st.style.display='inline';
+  document.getElementById('submit-msg').textContent='處理中...';
+  document.getElementById('download-box').style.display='none';
+  try{
+    const images=await collectImages();
+    const coverImage=images.length&&images[0].url?images[0].url:'';
+    const dateVal=document.getElementById('f-date').value;
+    const item={
+      id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+      title,category,
+      excerpt:document.getElementById('f-excerpt').value.trim(),
+      content:document.getElementById('f-content').value.trim(),
+      coverImage,images,
+      publishedAt:dateVal?new Date(dateVal).toISOString():new Date().toISOString(),
+      isHeadline:document.getElementById('f-headline').checked,
+      views:0
+    };
+    document.getElementById('submit-msg').textContent='儲存至 JSONBin...';
+    const all=await fetchAllNews();
+    all.unshift(item);
+    await saveAllNews(all);
+    _lastArticle=item;
+    // 嘗試 GitHub 自動推送，否則下載
+    const htmlContent=buildArticleHTML(item);
+    document.getElementById('submit-msg').textContent='推送至 GitHub...';
+    const pushed=await pushToGitHub(item.id+'.html', htmlContent).catch(()=>false);
+    if(pushed){
+      document.getElementById('download-box').style.display='none';
+      document.getElementById('pub-alert').className='alert alert-success show';
+      document.getElementById('pub-alert').textContent='新聞已發佈！文章 HTML 已自動推送至 GitHub，Cloudflare Pages 將在 1 分鐘內自動部署。';
+    } else {
+      // GitHub 未設定或失敗，改為自動下載
+      triggerDownload(item);
+      document.getElementById('download-box').style.display='block';
+      document.getElementById('pub-alert').className='alert alert-success show';
+      document.getElementById('pub-alert').textContent='新聞已發佈！文章 HTML 已自動下載，請將其放入 news/ 資料夾後重新上傳至 Cloudflare Pages。';
+    }
+    clearForm();loadManage();
+  }catch(e){
+    showAlert('pub-alert','error','發佈失敗：'+e.message);
+  }finally{
+    btn.disabled=false;st.style.display='none';
+  }
+}
+
+function clearForm(){
+  ['f-title','f-excerpt','f-content'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('f-category').value='breaking';
+  document.getElementById('f-date').value='';
+  document.getElementById('f-headline').checked=false;
+  document.getElementById('img-list').innerHTML='';
+  slotCount=0;
+}
+
+function buildArticleHTML(a){
+  const title  = (a.title||'')+' - TCDA NEWS';
+  const desc   = (a.excerpt||a.content||'台灣反屁孩協會官方媒體').slice(0,200);
+  const img    = a.coverImage||(a.images&&a.images[0]?a.images[0].url:'')||'';
+  const url    = 'https://twcda.com/news/'+a.id+'.html';
+  const binId  = getConfig().binId||'';
+  const cat    = {breaking:'即時',entertainment:'娛樂',internet:'網路',roblox:'ROBLOX',life:'生活'};
+  const catLbl = cat[a.category]||a.category||'新聞';
+
+  let coverHTML='';
+  if(img){
+    coverHTML='<img src="'+img+'" class="article-cover" alt="'+a.title+'">';
+    const parts=[];
+    if(a.images&&a.images[0]){
+      if(a.images[0].caption) parts.push(a.images[0].caption);
+      if(a.images[0].journalist) parts.push('記者：'+a.images[0].journalist);
+      if(a.images[0].source) parts.push('來源：'+a.images[0].source);
+    }
+    if(parts.length) coverHTML+='<div class="article-cover-caption">'+parts.join('　｜　')+'</div>';
+  } else {
+    coverHTML='<div class="article-cover-placeholder"></div>';
+  }
+
+  let extraHTML='';
+  const extras=(a.images||[]).slice(img?1:0);
+  if(extras.length){
+    extraHTML='<div class="article-images">';
+    extras.forEach(function(im){
+      if(!im.url) return;
+      let capHTML='';
+      if(im.caption) capHTML+='<div class="caption-text">'+im.caption+'</div>';
+      const mp=[];
+      if(im.journalist) mp.push('<span>記者：'+im.journalist+'</span>');
+      if(im.source) mp.push('<span>來源：'+im.source+'</span>');
+      if(mp.length) capHTML+='<div class="caption-meta">'+mp.join('')+'</div>';
+      extraHTML+='<div class="article-img-block"><img src="'+im.url+'" loading="lazy"><div class="article-img-caption">'+capHTML+'</div></div>';
+    });
+    extraHTML+='</div>';
+  }
+
+  const bodyPs=(a.content||'').split('\n').filter(function(l){return l.trim();}).map(function(l){return '<p>'+l+'</p>';}).join('');
+  const bodyHTML=bodyPs?'<div class="article-body">'+bodyPs+'</div>':'';
+
+  const d=new Date(a.publishedAt);
+  const dateStr=d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
+  const timeStr=d.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'});
+
+  return '<!DOCTYPE html>\n<html lang="zh-TW">\n<head>\n'
+    +'<meta charset="UTF-8"/>\n'
+    +'<meta name="viewport" content="width=device-width,initial-scale=1.0"/>\n'
+    +'<title>'+a.title+' \u2014 \u5435\u4ea4\u96c6\u5718 TCDA</title>\n'
+    +'<meta property="og:site_name" content="TCDA NEWS\uff5c\u5435\u4ea4\u96c6\u5718"/>\n'
+    +'<meta property="og:type" content="article"/>\n'
+    +'<meta property="og:title" content="'+title+'"/>\n'
+    +'<meta property="og:description" content="'+desc+'"/>\n'
+    +'<meta property="og:image" content="'+img+'"/>\n'
+    +'<meta property="og:url" content="'+url+'"/>\n'
+    +'<meta name="twitter:card" content="summary_large_image"/>\n'
+    +'<meta name="twitter:title" content="'+title+'"/>\n'
+    +'<meta name="twitter:description" content="'+desc+'"/>\n'
+    +'<meta name="twitter:image" content="'+img+'"/>\n'
+    +'<link rel="stylesheet" href="../style.css"/>\n'
+    +'<style>\n'
+    +'.article-wrap{max-width:820px;margin:0 auto;padding:32px 0 60px}\n'
+    +'.article-category-badge{display:inline-block;background:#111;color:#fff;font-size:10px;font-weight:800;padding:3px 12px;border-radius:20px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}\n'
+    +'.article-title{font-size:2rem;font-weight:900;color:#111;line-height:1.35;margin-bottom:16px;letter-spacing:1px}\n'
+    +'.article-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid #ddd;margin-bottom:28px;font-size:12px;color:#888;letter-spacing:1px}\n'
+    +'.article-cover{width:100%;max-height:480px;object-fit:cover;border-radius:14px;margin-bottom:8px;display:block}\n'
+    +'.article-cover-placeholder{width:100%;height:300px;background:linear-gradient(90deg,#ddd 25%,#eee 50%,#ddd 75%);background-size:600px 100%;border-radius:14px;margin-bottom:8px}\n'
+    +'.article-cover-caption{font-size:11px;color:#aaa;text-align:center;margin-bottom:28px;letter-spacing:0.5px}\n'
+    +'.article-body{font-size:15px;color:#222;line-height:2;letter-spacing:0.3px;margin-bottom:32px}\n'
+    +'.article-body p{margin-bottom:16px}\n'
+    +'.article-images{display:flex;flex-direction:column;gap:24px;margin-bottom:36px}\n'
+    +'.article-img-block{background:#fff;border:1px solid #eee;border-radius:12px;overflow:hidden}\n'
+    +'.article-img-block img{width:100%;max-height:420px;object-fit:cover;display:block}\n'
+    +'.article-img-caption{padding:12px 16px;background:#fafafa;border-top:1px solid #f0f0f0}\n'
+    +'.caption-text{font-size:13px;color:#444;margin-bottom:4px}\n'
+    +'.caption-meta{font-size:11px;color:#aaa;letter-spacing:1px;display:flex;gap:12px;flex-wrap:wrap}\n'
+    +'.article-back{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;transition:color .2s;cursor:pointer}\n'
+    +'.article-back:hover{color:#111}\n'
+    +'.article-share{display:flex;align-items:center;gap:12px;padding-top:24px;border-top:1px solid #eee;margin-top:8px}\n'
+    +'.article-share-label{font-size:11px;font-weight:800;color:#aaa;letter-spacing:2px;text-transform:uppercase}\n'
+    +'.share-btn{font-size:11px;font-weight:700;padding:5px 16px;border-radius:20px;border:1px solid #ddd;color:#555;background:transparent;cursor:pointer;letter-spacing:1px;transition:all .2s;font-family:inherit}\n'
+    +'.share-btn:hover{background:#111;color:#fff;border-color:#111}\n'
+    +'@media(max-width:768px){.article-title{font-size:1.5rem}}\n'
+    +'</style>\n</head>\n<body>\n'
+    +'<div class="top-bar"><div class="ticker-wrap"><span class="ticker-label">\u5feb\u8a0a</span><div class="ticker-content"><span>\u76ee\u524d\u66ab\u7121\u6700\u65b0\u5feb\u8a0a\uff0c\u8acb\u6301\u7e8c\u95dc\u6ce8\u5435\u4ea4\u96c6\u5718\u5b98\u65b9\u983b\u9053\u3002</span></div></div></div>\n'
+    +'<header class="site-header"><div class="header-inner"><div class="logo-area"><div class="site-title-wrap"><h1 class="site-title glow"><a href="../index.html" style="text-decoration:none;color:inherit;">\u5435\u4ea4\u96c6\u5718 <em class="tcda-em">TCDA</em></a></h1><div class="title-line"></div><p class="site-subtitle">\u53f0\u7063\u53cd\u5c41\u5b69\u5354\u6703\u3000\u5b98\u65b9\u5a92\u9ad4</p></div></div><div class="header-right"><div class="header-date" id="headerDate"></div></div></div></header>\n'
+    +'<nav class="main-nav"><div class="nav-inner"><ul>'
+    +'<li><a href="../index.html">\u9996\u9801</a></li>'
+    +'<li><a href="../breaking.html">\u5373\u6642\u65b0\u8a1e</a></li>'
+    +'<li><a href="../entertainment.html">\u5a1b\u6a02</a></li>'
+    +'<li><a href="../internet.html">\u7db2\u8def</a></li>'
+    +'<li><a href="../roblox.html">ROBLOX</a></li>'
+    +'<li><a href="../life.html">\u751f\u6d3b</a></li>'
+    +'<li><a href="../about.html">\u95dc\u65bc\u6211\u5011</a></li>'
+    +'</ul></div></nav>\n'
+    +'<main class="container"><div class="article-wrap">\n'
+    +'<div class="article-back" onclick="history.back()">\u2190 \u8fd4\u56de</div>\n'
+    +'<span class="article-category-badge">'+catLbl+'</span>\n'
+    +'<h1 class="article-title">'+a.title+'</h1>\n'
+    +'<div class="article-meta"><span>'+dateStr+'&nbsp;'+timeStr+'</span>'
+    +'<span>\ud83d\udc41 '+((a.views||0).toLocaleString())+' \u6b21\u700f\u89bd</span></div>\n'
+    +coverHTML+'\n'
+    +bodyHTML+'\n'
+    +extraHTML+'\n'
+    +'<div class="article-share"><span class="article-share-label">\u5206\u4eab</span>'
+    +'<button class="share-btn" onclick="navigator.clipboard.writeText(location.href).then(()=>alert(\'\u9023\u7d50\u5df2\u8907\u88fd\uff01\'))">複製連結</button>'
+    +'</div>\n'
+    +'</div></main>\n'
+    +'<footer class="site-footer"><div class="footer-inner">'
+    +'<div class="footer-col"><h3 class="glow-sm">\u5435\u4ea4\u96c6\u5718 <em class="tcda-em">TCDA</em></h3><p>\u53f0\u7063\u53cd\u5c41\u5b69\u5354\u6703\u5b98\u65b9\u5a92\u9ad4</p></div>'
+    +'</div><div class="footer-bottom"><p>&copy; 2026 \u5435\u4ea4\u96c6\u5718 TCDA &nbsp;|\u00a0 \u53f0\u7063\u53cd\u5c41\u5b69\u5354\u6703 \u7248\u6b0a\u6240\u6709</p></div></footer>\n'
+    +'<script>\n'
+    +'function updateDate(){var n=new Date();var el=document.getElementById("headerDate");if(el)el.textContent=n.toLocaleDateString("zh-TW",{year:"numeric",month:"long",day:"numeric",weekday:"long"})+" "+n.toLocaleTimeString("zh-TW",{hour:"2-digit",minute:"2-digit",second:"2-digit"});}\n'
+    +'updateDate();setInterval(updateDate,1000);\n'
+    +'var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});},{threshold:0.08});\n'
+    +'document.querySelectorAll(".fade-in,.anim-card").forEach(function(el){obs.observe(el);});\n'
+    +'<\/script>\n'
+    +'<script src="../tcda-config.js"><\/script>\n'
+    +'</body></html>';
+}
+
+function triggerDownload(article){
+  const a2=article||_lastArticle;
+  if(!a2){alert('請先發佈新聞。');return;}
+  const html=buildArticleHTML(a2);
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=a2.id+'.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+}
+
+async function loadManage(){
+  const list=document.getElementById('mgmt-list');
+  list.innerHTML='<div class="loading-msg"><span class="spinner"></span>載入中...</div>';
+  const news=await fetchAllNews();
+  const today=new Date().toDateString();
+  document.getElementById('st-total').textContent=news.length;
+  document.getElementById('st-breaking').textContent=news.filter(n=>n.category==='breaking').length;
+  document.getElementById('st-headline').textContent=news.filter(n=>n.isHeadline).length;
+  document.getElementById('st-today').textContent=news.filter(n=>new Date(n.publishedAt).toDateString()===today).length;
+  if(!news.length){list.innerHTML='<div class="empty-state">目前尚無新聞。</div>';return;}
+  list.innerHTML=news.map(n=>'<div class="news-mgmt-item">'
+    +'<div class="news-mgmt-info">'
+    +'<div class="news-mgmt-title">'+escH(n.title)+'</div>'
+    +'<div class="news-mgmt-meta">'
+    +'<span class="cat-badge">'+(CAT_LABEL[n.category]||n.category)+'</span>'
+    +(n.isHeadline?'<span class="headline-badge">頭條</span>':'')
+    +'<span>'+fmtDt(n.publishedAt)+'</span>'
+    +'<span>👁 '+(n.views||0).toLocaleString()+' 次</span>'
+    +'<span>🖼 '+(n.images||[]).length+' 圖</span>'
+    +'<a href="news/'+escH(n.id)+'.html" target="_blank" style="color:#1565c0;font-size:11px">查看靜態頁</a>'
+    +'<a href="article.html?id='+escH(n.id)+'" target="_blank" style="color:#888;font-size:11px">查看動態頁</a>'
+    +'</div></div>'
+    +'<div class="news-mgmt-actions"><button class="btn-danger" onclick="deleteNews(\''+n.id+'\')">刪除</button></div>'
+    +'</div>').join('');
+}
+async function deleteNews(id){
+  if(!confirm('確定要刪除這則新聞嗎？')) return;
+  try{
+    const all=await fetchAllNews();
+    await saveAllNews(all.filter(n=>n.id!==id));
+    showAlert('mgmt-alert','success','已刪除。');
+    loadManage();
+  }catch(e){showAlert('mgmt-alert','error','刪除失敗：'+e.message);}
+}
+
+function escH(s){if(!s)return'';return String(s).replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/"/g,'"');}
+function fmtDt(iso){if(!iso)return'—';const d=new Date(iso);return d.toLocaleString('zh-TW',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});}
+
+checkSession();
+</script>
+</body>
+</html>

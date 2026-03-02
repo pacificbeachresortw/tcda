@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>新聞內文 — 吵交集團 TCDA</title>
+  <!-- Open Graph 預設值（JS 會動態覆蓋） -->
+  <meta property="og:site_name" content="TCDA NEWS｜吵交集團"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="吵交集團 TCDA — 新聞"/>
+  <meta property="og:description" content="台灣反屁孩協會官方媒體"/>
+  <meta property="og:image" content=""/>
+  <meta property="og:url" content=""/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TCDA_NEWS"/>
+  <meta name="twitter:title" content="吵交集團 TCDA — 新聞"/>
+  <meta name="twitter:description" content="台灣反屁孩協會官方媒體"/>
+  <meta name="twitter:image" content=""/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .article-wrap{max-width:820px;margin:0 auto;padding:32px 0 60px}
+    .article-category-badge{display:inline-block;background:#111;color:#fff;font-size:10px;font-weight:800;padding:3px 12px;border-radius:20px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+    .article-title{font-size:2rem;font-weight:900;color:#111;line-height:1.35;margin-bottom:16px;letter-spacing:1px}
+    .article-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid #ddd;margin-bottom:28px;font-size:12px;color:#888;letter-spacing:1px}
+    .article-meta .meta-views{display:flex;align-items:center;gap:4px}
+    .article-cover{width:100%;max-height:480px;object-fit:cover;border-radius:14px;margin-bottom:8px;display:block}
+    .article-cover-placeholder{width:100%;height:300px;background:linear-gradient(90deg,#ddd 25%,#eee 50%,#ddd 75%);background-size:600px 100%;border-radius:14px;margin-bottom:8px}
+    .article-cover-caption{font-size:11px;color:#aaa;text-align:center;margin-bottom:28px;letter-spacing:0.5px}
+    .article-body{font-size:15px;color:#222;line-height:2;letter-spacing:0.3px;margin-bottom:32px}
+    .article-body p{margin-bottom:16px}
+    .article-images{display:flex;flex-direction:column;gap:24px;margin-bottom:36px}
+    .article-img-block{background:#fff;border:1px solid #eee;border-radius:12px;overflow:hidden}
+    .article-img-block img{width:100%;max-height:420px;object-fit:cover;display:block}
+    .article-img-caption{padding:12px 16px;background:#fafafa;border-top:1px solid #f0f0f0}
+    .article-img-caption .caption-text{font-size:13px;color:#444;margin-bottom:4px}
+    .article-img-caption .caption-meta{font-size:11px;color:#aaa;letter-spacing:1px;display:flex;gap:12px;flex-wrap:wrap}
+    .article-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+    .article-tag{font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;background:#f0f0f0;color:#555;letter-spacing:1px}
+    .article-back{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;transition:color .2s;cursor:pointer}
+    .article-back:hover{color:#111}
+    .article-share{display:flex;align-items:center;gap:12px;padding-top:24px;border-top:1px solid #eee;margin-top:8px}
+    .article-share-label{font-size:11px;font-weight:800;color:#aaa;letter-spacing:2px;text-transform:uppercase}
+    .share-btn{font-size:11px;font-weight:700;padding:5px 16px;border-radius:20px;border:1px solid #ddd;color:#555;background:transparent;cursor:pointer;letter-spacing:1px;transition:all .2s;font-family:inherit}
+    .share-btn:hover{background:#111;color:#fff;border-color:#111}
+    .article-not-found{text-align:center;padding:80px 24px;color:#bbb;font-size:14px;letter-spacing:2px}
+    .article-loading{text-align:center;padding:80px 24px;color:#aaa;font-size:13px;letter-spacing:2px}
+    .spinner-lg{display:inline-block;width:24px;height:24px;border:2px solid #eee;border-top-color:#111;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .related-section{margin-top:48px}
+    .related-title{font-size:12px;font-weight:800;letter-spacing:3px;color:#111;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #111;position:relative}
+    .related-title::after{content:'';position:absolute;bottom:-2px;left:0;width:50px;height:2px;background:#fff}
+    @media(max-width:768px){.article-title{font-size:1.5rem}.article-wrap{padding:20px 0 40px}}
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="ticker-wrap">
+    <span class="ticker-label">快訊</span>
+    <div class="ticker-content">
+      <span>目前暫無最新快訊，請持續關注吵交集團官方頻道。</span>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="site-title-wrap">
+        <h1 class="site-title glow"><a href="index.html" style="text-decoration:none;color:inherit;">吵交集團 <em class="tcda-em">TCDA</em></a></h1>
+        <div class="title-line"></div>
+        <p class="site-subtitle">台灣反屁孩協會　官方媒體</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-date" id="headerDate"></div>
+      <div class="search-box">
+        <input type="text" placeholder="搜尋新聞"/>
+        <button>搜尋</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="main-nav">
+  <div class="nav-inner">
+    <ul>
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="breaking.html">即時新聞</a></li>
+      <li><a href="entertainment.html">娛樂</a></li>
+      <li><a href="internet.html">網路</a></li>
+      <li><a href="roblox.html">ROBLOX</a></li>
+      <li><a href="life.html">生活</a></li>
+      <li><a href="about.html">關於我們</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="article-wrap" id="article-wrap">
+    <div class="article-loading"><span class="spinner-lg"></span>載入中...</div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h3 class="glow-sm">吵交集團 <em class="tcda-em">TCDA</em></h3>
+      <p>台灣反屁孩協會官方媒體</p>
+      <p>拒絕屁孩，守護正義</p>
+    </div>
+    <div class="footer-col">
+      <h4>快速連結</h4>
+      <ul>
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="breaking.html">即時新聞</a></li>
+        <li><a href="entertainment.html">娛樂</a></li>
+        <li><a href="roblox.html">ROBLOX</a></li>
+        <li><a href="about.html">關於我們</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>聯絡我們</h4>
+      <ul>
+        <li>service@twcda.com</li>
+        <li>Discord：discord.gg/tcda</li>
+        <li>台灣</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>社群媒體</h4>
+      <div class="social-links">
+        <a href="#" class="social-btn">Facebook</a>
+        <a href="#" class="social-btn">Instagram</a>
+        <a href="#" class="social-btn">YouTube</a>
+        <a href="#" class="social-btn">X</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 吵交集團 TCDA &nbsp;|&nbsp; 台灣反屁孩協會 版權所有 &nbsp;|&nbsp; <a href="#">隱私政策</a> &nbsp;|&nbsp; <a href="#">服務條款</a></p>
+  </div>
+</footer>
+
+<script src="tcda-config.js"></script>
+<script>
+function updateDate(){
+  const now=new Date();
+  const d=now.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
+  const t=now.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const el=document.getElementById('headerDate');
+  if(el) el.textContent=d+'　'+t;
+}
+updateDate(); setInterval(updateDate,1000);
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08});
+document.querySelectorAll('.fade-in,.anim-card').forEach(el=>observer.observe(el));
+window._tcdaObserver=observer;
+
+const CAT_LABEL={breaking:'即時',entertainment:'娛樂',internet:'網路',roblox:'ROBLOX',life:'生活'};
+const CAT_PAGE={breaking:'breaking.html',entertainment:'entertainment.html',internet:'internet.html',roblox:'roblox.html',life:'life.html'};
+const STORAGE_KEY='tcda_jsonbin_config';
+
+function getConfig(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{};}catch{return{};}}
+function escHtml(s){if(!s)return'';return String(s).replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/"/g,'"');}
+function formatDate(iso){if(!iso)return'';const d=new Date(iso);return d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'long'});}
+function formatTime(iso){if(!iso)return'';const d=new Date(iso);return d.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'});}
+
+async function loadArticle(){
+  const params=new URLSearchParams(location.search);
+  const id=params.get('id');
+  const wrap=document.getElementById('article-wrap');
+  if(!id){wrap.innerHTML='<div class="article-not-found">找不到指定新聞。</div>';return;}
+  const cfg=getConfig();
+  // 優先用 tcda-config.js 的公開 Bin ID
+  const binId=(window.TCDA_BIN_ID&&window.TCDA_BIN_ID!=='YOUR_BIN_ID_HERE')?window.TCDA_BIN_ID:cfg.binId;
+  if(!binId){wrap.innerHTML='<div class="article-not-found">尚未設定資料來源，請確認 tcda-config.js。</div>';return;}
+  try{
+    const headers={};
+    if(cfg.masterKey) headers['X-Master-Key']=cfg.masterKey;
+    const res=await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`,{headers});
+    if(!res.ok){wrap.innerHTML='<div class="article-not-found">載入失敗，請稍後再試。</div>';return;}
+    const json=await res.json();
+    const all=json.record?.news||[];
+    const article=all.find(n=>n.id===id);
+    if(!article){wrap.innerHTML='<div class="article-not-found">找不到此篇新聞。</div>';return;}
+
+    // 更新頁面標題與 OG 標籤
+    document.title=article.title+' — 吵交集團 TCDA';
+    const coverImg2=article.coverImage||(article.images&&article.images[0]&&article.images[0].url)||'';
+    const desc=article.excerpt||article.content||'台灣反屁孩協會官方媒體';
+    const url=location.href;
+    function setMeta(sel,val){const el=document.querySelector(sel);if(el)el.setAttribute(el.hasAttribute('content')?'content':'href',val);}
+    setMeta('meta[property="og:title"]',article.title+' — TCDA NEWS');
+    setMeta('meta[property="og:description"]',desc.slice(0,120));
+    setMeta('meta[property="og:image"]',coverImg2);
+    setMeta('meta[property="og:url"]',url);
+    setMeta('meta[name="twitter:title"]',article.title+' — TCDA NEWS');
+    setMeta('meta[name="twitter:description"]',desc.slice(0,120));
+    setMeta('meta[name="twitter:image"]',coverImg2);
+
+    // 更新 nav active
+    const catPage=CAT_PAGE[article.category];
+    document.querySelectorAll('.main-nav li a').forEach(a=>{
+      if(catPage && a.getAttribute('href')===catPage) a.closest('li').classList.add('active');
+    });
+
+    // 封面圖
+    const coverImg=article.coverImage||(article.images&&article.images[0]&&article.images[0].url)||'';
+    const coverCaption=article.images&&article.images[0]?article.images[0].caption||'':'';
+    const coverJournalist=article.images&&article.images[0]?article.images[0].journalist||'':'';
+    const coverSource=article.images&&article.images[0]?article.images[0].source||'':'';
+    let coverHTML='';
+    if(coverImg){
+      coverHTML=`<img src="${escHtml(coverImg)}" class="article-cover" alt="${escHtml(article.title)}">`;
+      const capParts=[];
+      if(coverCaption) capParts.push(escHtml(coverCaption));
+      if(coverJournalist) capParts.push('記者：'+escHtml(coverJournalist));
+      if(coverSource) capParts.push('來源：'+escHtml(coverSource));
+      if(capParts.length) coverHTML+=`<div class="article-cover-caption">${capParts.join('　｜　')}</div>`;
+    } else {
+      coverHTML='<div class="article-cover-placeholder"></div>';
+    }
+
+    // 其餘圖片（排除第一張）
+    const extraImages=(article.images||[]).slice(coverImg?1:0);
+    let imagesHTML='';
+    if(extraImages.length){
+      imagesHTML='<div class="article-images">';
+      extraImages.forEach(img=>{
+        if(!img.url) return;
+        const capParts=[];
+        if(img.caption) capParts.push(`<div class="caption-text">${escHtml(img.caption)}</div>`);
+        const metaParts=[];
+        if(img.journalist) metaParts.push('<span>記者：'+escHtml(img.journalist)+'</span>');
+        if(img.source) metaParts.push('<span>來源：'+escHtml(img.source)+'</span>');
+        const capHTML=capParts.join('')+(metaParts.length?`<div class="caption-meta">${metaParts.join('')}</div>`:'');
+        imagesHTML+=`<div class="article-img-block"><img src="${escHtml(img.url)}" alt="${escHtml(img.caption||'')}" loading="lazy"><div class="article-img-caption">${capHTML}</div></div>`;
+      });
+      imagesHTML+='</div>';
+    }
+
+    // 內文段落
+    const bodyParagraphs=(article.content||'').split('\n').filter(l=>l.trim()).map(l=>`<p>${escHtml(l)}</p>`).join('');
+    const bodyHTML=bodyParagraphs?`<div class="article-body">${bodyParagraphs}</div>`:'';
+
+    // 相關新聞
+    const related=all.filter(n=>n.id!==id&&n.category===article.category).slice(0,3);
+    let relatedHTML='';
+    if(related.length){
+      relatedHTML=`<div class="related-section"><div class="related-title">相關新聞</div><div class="card-grid">`;
+      related.forEach((n,i)=>{
+        const img=n.coverImage||(n.images&&n.images[0]&&n.images[0].url)||'';
+        relatedHTML+=`<div class="news-card anim-card" style="animation-delay:${i*0.05}s;cursor:pointer" onclick="location.href='article.html?id=${escHtml(n.id)}'">
+          ${img?`<img src="${escHtml(img)}" class="card-real-img" alt="" loading="lazy">`:'<div class="card-img-placeholder"></div>'}
+          <div class="card-body">
+            <span class="cat-tag">${escHtml(CAT_LABEL[n.category]||n.category)}</span>
+            <p class="card-title-real">${escHtml(n.title)}</p>
+            <div class="card-footer-row"><span class="card-time-tag">${formatDate(n.publishedAt)}</span><span class="card-views">👁 ${(n.views||0).toLocaleString()}</span></div>
+          </div></div>`;
+      });
+      relatedHTML+='</div></div>';
+    }
+
+    wrap.innerHTML=`
+      <div class="article-back" onclick="history.back()">← 返回</div>
+      <span class="article-category-badge">${escHtml(CAT_LABEL[article.category]||article.category)}</span>
+      <h1 class="article-title">${escHtml(article.title)}</h1>
+      <div class="article-meta">
+        <span>${formatDate(article.publishedAt)} ${formatTime(article.publishedAt)}</span>
+        <span class="meta-views">👁 <span id="art-views">${(article.views||0).toLocaleString()}</span> 次瀏覽</span>
+      </div>
+      ${coverHTML}
+      ${bodyHTML}
+      ${imagesHTML}
+      <div class="article-share">
+        <span class="article-share-label">分享</span>
+        <button class="share-btn" onclick="copyLink()">複製連結</button>
+        <button class="share-btn" onclick="shareX()">X (Twitter)</button>
+      </div>
+      ${relatedHTML}`;
+
+    // 觀察相關新聞動畫
+    if(window._tcdaObserver){
+      wrap.querySelectorAll('.anim-card').forEach(el=>window._tcdaObserver.observe(el));
+    }
+
+    // 計次
+    trackArticleView(id, all, cfg);
+  }catch(e){
+    wrap.innerHTML='<div class="article-not-found">載入失敗：'+escHtml(e.message)+'</div>';
+  }
+}
+
+async function trackArticleView(id, all, cfg){
+  const sk='tcda_viewed_'+id;
+  if(sessionStorage.getItem(sk)) return;
+  sessionStorage.setItem(sk,'1');
+  const el=document.getElementById('art-views');
+  if(el) el.textContent=((parseInt(el.textContent.replace(/\D/g,''))||0)+1).toLocaleString();
+  if(!cfg.binId||!cfg.masterKey) return;
+  try{
+    const idx=all.findIndex(n=>n.id===id);
+    if(idx===-1) return;
+    all[idx].views=(all[idx].views||0)+1;
+    await fetch(`https://api.jsonbin.io/v3/b/${cfg.binId}`,{
+      method:'PUT',
+      headers:{'Content-Type':'application/json','X-Master-Key':cfg.masterKey,'X-Bin-Versioning':'false'},
+      body:JSON.stringify({news:all})
+    });
+  }catch{}
+}
+
+function copyLink(){
+  navigator.clipboard.writeText(location.href).then(()=>alert('連結已複製！')).catch(()=>alert('複製失敗，請手動複製網址。'));
+}
+function shareX(){
+  const title=document.querySelector('.article-title');
+  const t=title?title.textContent:'';
+  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(location.href),'_blank');
+}
+
+loadArticle();
+</script>
+</body>
+</html>
