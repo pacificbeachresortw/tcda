@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>後台管理 — 吵交集團 TCDA</title>
+<title>後台管理 — 台灣網路觀察新聞網 TNC</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Microsoft JhengHei',sans-serif;background:#f0f0f0;color:#111;min-height:100vh}
@@ -94,7 +94,7 @@ a{text-decoration:none;color:inherit}
 
 <div id="login-screen">
   <div class="login-box">
-    <div class="login-title">吵交集團 <em>TCDA</em></div>
+    <div class="login-title">台灣網路觀察新聞網 <em>TNC</em></div>
     <div class="login-sub">後台管理系統</div>
     <input type="password" id="pw-input" placeholder="輸入管理員密碼" onkeydown="if(event.key==='Enter')doLogin()"/>
     <button class="btn-login" onclick="doLogin()">登入</button>
@@ -104,7 +104,7 @@ a{text-decoration:none;color:inherit}
 
 <header class="admin-header">
   <div style="display:flex;align-items:center">
-    <span class="admin-logo">吵交集團 <em>TCDA</em></span>
+    <span class="admin-logo">台灣網路觀察新聞網 <em>TNC</em></span>
     <span class="admin-badge">ADMIN</span>
   </div>
   <div style="display:flex;align-items:center;gap:16px">
@@ -464,8 +464,8 @@ function clearForm(){
 }
 
 function buildArticleHTML(a){
-  const title  = (a.title||'')+' - TCDA NEWS';
-  const desc   = (a.excerpt||a.content||'台灣反屁孩協會官方媒體').slice(0,200);
+  const title  = (a.title||'')+' - TNC NEWS';
+  const desc   = (a.excerpt||a.content||'台灣網路觀察新聞網 官方媒體').slice(0,200);
   const img    = a.coverImage||(a.images&&a.images[0]?a.images[0].url:'')||'';
   const url    = 'https://twcda.com/news/'+a.id+'.html';
   const binId  = getConfig().binId||'';
@@ -513,8 +513,8 @@ function buildArticleHTML(a){
   return '<!DOCTYPE html>\n<html lang="zh-TW">\n<head>\n'
     +'<meta charset="UTF-8"/>\n'
     +'<meta name="viewport" content="width=device-width,initial-scale=1.0"/>\n'
-    +'<title>'+a.title+' \u2014 \u5435\u4ea4\u96c6\u5718 TCDA</title>\n'
-    +'<meta property="og:site_name" content="TCDA NEWS\uff5c\u5435\u4ea4\u96c6\u5718"/>\n'
+    +'<title>'+a.title+' \u2014 \u5435\u4ea4\u96c6\u5718 TNC</title>\n'
+    +'<meta property="og:site_name" content="TNC NEWS\uff5c\u5435\u4ea4\u96c6\u5718"/>\n'
     +'<meta property="og:type" content="article"/>\n'
     +'<meta property="og:title" content="'+title+'"/>\n'
     +'<meta property="og:description" content="'+desc+'"/>\n'
@@ -550,7 +550,7 @@ function buildArticleHTML(a){
     +'@media(max-width:768px){.article-title{font-size:1.5rem}}\n'
     +'</style>\n</head>\n<body>\n'
     +'<div class="top-bar"><div class="ticker-wrap"><span class="ticker-label">\u5feb\u8a0a</span><div class="ticker-content"><span>\u76ee\u524d\u66ab\u7121\u6700\u65b0\u5feb\u8a0a\uff0c\u8acb\u6301\u7e8c\u95dc\u6ce8\u5435\u4ea4\u96c6\u5718\u5b98\u65b9\u983b\u9053\u3002</span></div></div></div>\n'
-    +'<header class="site-header"><div class="header-inner"><div class="logo-area"><div class="site-title-wrap"><h1 class="site-title glow"><a href="../index.html" style="text-decoration:none;color:inherit;">\u5435\u4ea4\u96c6\u5718 <em class="tcda-em">TCDA</em></a></h1><div class="title-line"></div><p class="site-subtitle">\u53f0\u7063\u53cd\u5c41\u5b69\u5354\u6703\u3000\u5b98\u65b9\u5a92\u9ad4</p></div></div><div class="header-right"><div class="header-date" id="headerDate"></div></div></div></header>\n'
+    +'<header class="site-header"><div class="header-inner"><div class="logo-area"><div class="site-title-wrap"><h1 class="site-title glow"><a href="../index.html" style="text-decoration:none;color:inherit;">\u5435\u4ea4\u96c6\u5718 <em class="tcda-em">TNC</em></a></h1><div class="title-line"></div><p class="site-subtitle">\u53f0\u7063\u53cd\u5c41\u5b69\u5354\u6703\u3000\u5b98\u65b9\u5a92\u9ad4</p></div></div><div class="header-right"><div class="header-date" id="headerDate"></div></div></div></header>\n'
     +'<nav class="main-nav"><div class="nav-inner"><ul>'
     +'<li><a href="../index.html">\u9996\u9801</a></li>'
     +'<li><a href="../breaking.html">\u5373\u6642\u65b0\u8a1e</a></li>'
@@ -574,8 +574,8 @@ function buildArticleHTML(a){
     +'</div>\n'
     +'</div></main>\n'
     +'<footer class="site-footer"><div class="footer-inner">'
-    +'<div class="footer-col"><h3 class="glow-sm">\u5435\u4ea4\u96c6\u5718 <em class="tcda-em">TCDA</em></h3><p>\u53f0\u7063\u53cd\u5c41\u5b69\u5354\u6703\u5b98\u65b9\u5a92\u9ad4</p></div>'
-    +'</div><div class="footer-bottom"><p>&copy; 2026 \u5435\u4ea4\u96c6\u5718 TCDA &nbsp;|\u00a0 \u53f0\u7063\u53cd\u5c41\u5b69\u5354\u6703 \u7248\u6b0a\u6240\u6709</p></div></footer>\n'
+    +'<div class="footer-col"><h3 class="glow-sm">\u5435\u4ea4\u96c6\u5718 <em class="tcda-em">TNC</em></h3><p>\u53f0\u7063\u53cd\u5c41\u5b69\u5354\u6703\u5b98\u65b9\u5a92\u9ad4</p></div>'
+    +'</div><div class="footer-bottom"><p>&copy; 2026 \u5435\u4ea4\u96c6\u5718 TNC &nbsp;|\u00a0 \u53f0\u7063\u53cd\u5c41\u5b69\u5354\u6703 \u7248\u6b0a\u6240\u6709</p></div></footer>\n'
     +'<script>\n'
     +'function updateDate(){var n=new Date();var el=document.getElementById("headerDate");if(el)el.textContent=n.toLocaleDateString("zh-TW",{year:"numeric",month:"long",day:"numeric",weekday:"long"})+" "+n.toLocaleTimeString("zh-TW",{hour:"2-digit",minute:"2-digit",second:"2-digit"});}\n'
     +'updateDate();setInterval(updateDate,1000);\n'

@@ -1,5 +1,5 @@
 /**
- * 吵交集團 TCDA — Cloudflare Worker
+ * 台灣網路觀察新聞網 TNC — Cloudflare Worker
  * Route 設定：*twcda.com/article.html*
  */
 
@@ -38,8 +38,8 @@ async function handleRequest(request) {
     return fetch(request);
   }
 
-  const title = (article.title || '') + ' - TCDA NEWS';
-  const desc  = (article.excerpt || article.content || '台灣反屁孩協會官方媒體').slice(0, 200);
+  const title = (article.title || '') + ' - TNC NEWS';
+  const desc  = (article.excerpt || article.content || '台灣網路觀察新聞網 官方媒體').slice(0, 200);
   const img   = article.coverImage ||
                 (article.images && article.images[0] ? article.images[0].url : '') || '';
   const real  = 'https://twcda.com/article.html?id=' + encodeURIComponent(id) + '&noworker=1';
@@ -48,7 +48,7 @@ async function handleRequest(request) {
     '<!DOCTYPE html><html><head>' +
     '<meta charset="UTF-8"/>' +
     '<title>' + title + '</title>' +
-    '<meta property="og:site_name" content="TCDA NEWS | 吵交集團"/>' +
+    '<meta property="og:site_name" content="TNC NEWS | 台灣網路觀察新聞網"/>' +
     '<meta property="og:type" content="article"/>' +
     '<meta property="og:title" content="' + title + '"/>' +
     '<meta property="og:description" content="' + desc + '"/>' +

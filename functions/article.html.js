@@ -54,8 +54,8 @@ export async function onRequest(context) {
       const article = news.find(n => n.id === id);
 
       if (article) {
-        const title = escAttr(article.title + ' — TCDA NEWS｜吵交集團');
-        const desc = escAttr((article.excerpt || article.content || '台灣反屁孩協會官方媒體').slice(0, 200));
+        const title = escAttr(article.title + ' — TNC NEWS｜台灣網路觀察新聞網');
+        const desc = escAttr((article.excerpt || article.content || '台灣網路觀察新聞網 官方媒體').slice(0, 200));
         const image = escAttr(
           article.coverImage ||
           (article.images && article.images.length && article.images[0].url) ||
@@ -65,7 +65,7 @@ export async function onRequest(context) {
 
         // 注入文章專屬 OG 標籤
         html = html
-          .replace(/<title>[^<]*<\/title>/, `<title>${escAttr(article.title)} — 吵交集團 TCDA</title>`)
+          .replace(/<title>[^<]*<\/title>/, `<title>${escAttr(article.title)} — 台灣網路觀察新聞網 TNC</title>`)
           .replace(/(<meta property="og:title" content=")[^"]*(")/,     `$1${title}$2`)
           .replace(/(<meta property="og:description" content=")[^"]*(")/,`$1${desc}$2`)
           .replace(/(<meta property="og:image" content=")[^"]*(")/,     `$1${image}$2`)

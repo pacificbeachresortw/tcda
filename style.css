@@ -103,7 +103,7 @@ ul { list-style: none; }
   transform: translateY(0);
 }
 
-/* ===== TCDA 斜粗體 ===== */
+/* ===== TNC 斜粗體 ===== */
 .tcda-em {
   font-style: italic;
   font-weight: 900;
