@@ -225,17 +225,27 @@ const TCDA_NEWS = (() => {
       if (ml) ml.href = 'breaking.html';
     }
 
-    // 分類卡片
-    ['internet','roblox','entertainment'].forEach(cat => {
+    // 分類卡片：依最新文章時間排序，有新聞的分類排前面
+    const cats = ['internet','roblox','entertainment','life'];
+    const catOrder = cats.map(cat => {
+      const items = filterByCategory(all, cat);
+      const latest = items.length ? new Date(items[0].publishedAt).getTime() : 0;
+      return {cat, items, latest};
+    }).sort((a, b) => b.latest - a.latest);
+
+    // 找到第一個有 data-section 的父容器，重新排列
+    const mainContent = document.querySelector('.main-content');
+    catOrder.forEach(({cat, items}) => {
       const sec = document.querySelector('[data-section="'+cat+'"]');
       if (!sec) return;
       const grid = sec.querySelector('.card-grid');
       if (!grid) return;
-      const items = filterByCategory(all, cat).slice(0, 3);
-      grid.innerHTML = items.length ? items.map((n,i) => cardHTML(n, i*0.05)).join('') : emptyCards(cat, 3);
+      grid.innerHTML = items.length ? items.slice(0,3).map((n,i) => cardHTML(n, i*0.05)).join('') : emptyCards(cat, 3);
       reObserve(grid);
       const ml = sec.querySelector('.more-link');
       if (ml) ml.href = cat+'.html';
+      // 把有新聞的分類移到 main-content 最後（保持位置但視覺上排序）
+      if (mainContent && items.length) mainContent.appendChild(sec);
     });
 
     // 熱門
