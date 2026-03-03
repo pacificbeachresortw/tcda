@@ -20,7 +20,7 @@
 .article-category-badge{display:inline-block;background:#111;color:#fff;font-size:10px;font-weight:800;padding:3px 12px;border-radius:20px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
 .article-title{font-size:2rem;font-weight:900;color:#111;line-height:1.35;margin-bottom:16px;letter-spacing:1px}
 .article-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid #ddd;margin-bottom:28px;font-size:12px;color:#888;letter-spacing:1px}
-.article-cover{width:100%;max-height:480px;object-fit:cover;border-radius:14px;margin-bottom:8px;display:block}
+.article-cover{width:100%;display:block}
 .article-cover-placeholder{width:100%;height:300px;background:linear-gradient(90deg,#ddd 25%,#eee 50%,#ddd 75%);background-size:600px 100%;border-radius:14px;margin-bottom:8px}
 .article-cover-caption{font-size:11px;color:#aaa;text-align:center;margin-bottom:28px;letter-spacing:0.5px}
 .article-body{font-size:15px;color:#222;line-height:2;letter-spacing:0.3px;margin-bottom:32px}
@@ -38,7 +38,16 @@
 .share-btn{font-size:11px;font-weight:700;padding:5px 16px;border-radius:20px;border:1px solid #ddd;color:#555;background:transparent;cursor:pointer;letter-spacing:1px;transition:all .2s;font-family:inherit}
 .share-btn:hover{background:#111;color:#fff;border-color:#111}
 @media(max-width:768px){.article-title{font-size:1.5rem}}
-</style>
+
+    .smart-img-wrap{width:100%;border-radius:14px;overflow:hidden;background:#f5f5f5;margin-bottom:8px;display:flex;align-items:center;justify-content:center;}
+    .smart-img-wrap.is-landscape{max-height:520px;}
+    .smart-img-wrap.is-portrait{max-height:700px;background:#111;}
+    .smart-img-wrap img{width:100%;display:block;transition:none;}
+    .smart-img-wrap.is-landscape img{object-fit:cover;max-height:520px;}
+    .smart-img-wrap.is-portrait img{object-fit:contain;max-height:700px;}
+    .article-img-block .smart-img-wrap{border-radius:0;margin-bottom:0;}
+    .article-cover-placeholder{width:100%;height:220px;background:#eee;border-radius:14px;margin-bottom:8px;}
+    </style>
 </head>
 <body>
 <div class="top-bar"><div class="ticker-wrap"><span class="ticker-label">快訊</span><div class="ticker-content"><span>目前暫無最新快訊，請持續關注台灣網路觀察新聞網官方頻道。</span></div></div></div>
@@ -62,4 +71,23 @@ var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isInters
 document.querySelectorAll(".fade-in,.anim-card").forEach(function(el){obs.observe(el);});
 </script>
 <script src="../tcda-config.js"></script>
+
+<script>
+(function(){
+  function fit(img){
+    function go(){
+      if(!img.naturalWidth) return;
+      var w=img.parentElement;
+      if(!w||!w.classList.contains('smart-img-wrap')) return;
+      if(img.naturalHeight > img.naturalWidth * 1.05){
+        w.className='smart-img-wrap is-portrait';
+      } else {
+        w.className='smart-img-wrap is-landscape';
+      }
+    }
+    if(img.complete && img.naturalWidth){ go(); } else { img.onload=go; }
+  }
+  document.querySelectorAll('.smart-img-wrap img').forEach(fit);
+})();
+</script>
 </body></html>
