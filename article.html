@@ -52,7 +52,29 @@
     .related-title{font-size:12px;font-weight:800;letter-spacing:3px;color:#111;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #111;position:relative}
     .related-title::after{content:'';position:absolute;bottom:-2px;left:0;width:50px;height:2px;background:#fff}
     @media(max-width:768px){.article-title{font-size:1.5rem}.article-wrap{padding:20px 0 40px}}
-  </style>
+  
+    /* ── 智慧圖片顯示 ── */
+    .smart-img-wrap {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #f0f0f0;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .smart-img-wrap.is-landscape { max-height: 480px; }
+    .smart-img-wrap.is-portrait  { max-height: 640px; background: #111; }
+    .smart-img-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .smart-img-wrap.is-landscape img { object-fit: cover; max-height: 480px; }
+    .smart-img-wrap.is-portrait  img { object-fit: contain; max-height: 640px; }
+    .article-img-block .smart-img-wrap { border-radius: 0; margin-bottom: 0; }
+    </style>
 </head>
 <body>
 
@@ -322,5 +344,35 @@ function shareX(){
 
 loadArticle();
 </script>
+
+<script>
+// 智慧偵測直式/橫式圖片
+function applySmartImg(img) {
+  function check() {
+    if (!img.naturalWidth) return;
+    const wrap = img.closest('.smart-img-wrap');
+    if (!wrap) return;
+    if (img.naturalHeight > img.naturalWidth * 1.1) {
+      wrap.classList.add('is-portrait');
+      wrap.classList.remove('is-landscape');
+    } else {
+      wrap.classList.add('is-landscape');
+      wrap.classList.remove('is-portrait');
+    }
+  }
+  if (img.complete && img.naturalWidth) { check(); }
+  else { img.addEventListener('load', check); }
+}
+document.querySelectorAll('.smart-img-wrap img').forEach(applySmartImg);
+// 動態載入的也處理
+const imgObs = new MutationObserver(() => {
+  document.querySelectorAll('.smart-img-wrap img:not([data-si])').forEach(img => {
+    img.setAttribute('data-si','1');
+    applySmartImg(img);
+  });
+});
+imgObs.observe(document.body, {childList:true, subtree:true});
+</script>
+
 </body>
 </html>

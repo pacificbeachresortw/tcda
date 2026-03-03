@@ -480,7 +480,7 @@ function buildArticleHTML(a){
 
   let coverHTML='';
   if(img){
-    coverHTML='<img src="'+img+'" class="article-cover" alt="'+a.title+'">';
+    coverHTML='<div class="smart-img-wrap" id="cover-wrap"><img src="'+img+'" class="article-cover" alt="'+a.title+'" onload="(function(i){var w=i.closest(\'#cover-wrap\');if(w){if(i.naturalHeight>i.naturalWidth*1.1){w.className=\'smart-img-wrap is-portrait\';}else{w.className=\'smart-img-wrap is-landscape\';}}})(this)"></div>';
     const parts=[];
     if(a.images&&a.images[0]){
       if(a.images[0].caption) parts.push(a.images[0].caption);
@@ -536,7 +536,7 @@ function buildArticleHTML(a){
     +'.article-category-badge{display:inline-block;background:#111;color:#fff;font-size:10px;font-weight:800;padding:3px 12px;border-radius:20px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}\n'
     +'.article-title{font-size:2rem;font-weight:900;color:#111;line-height:1.35;margin-bottom:16px;letter-spacing:1px}\n'
     +'.article-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid #ddd;margin-bottom:28px;font-size:12px;color:#888;letter-spacing:1px}\n'
-    +'.article-cover{width:100%;max-height:480px;object-fit:cover;border-radius:14px;margin-bottom:8px;display:block}\n'
+    +'.smart-img-wrap{width:100%;border-radius:14px;overflow:hidden;background:#f0f0f0;margin-bottom:8px;display:flex;align-items:center;justify-content:center;}\n'+'.smart-img-wrap.is-landscape{max-height:480px;}\n'+'.smart-img-wrap.is-portrait{max-height:640px;background:#111;}\n'+'.smart-img-wrap img{width:100%;display:block;}\n'+'.smart-img-wrap.is-landscape img{object-fit:cover;max-height:480px;}\n'+'.smart-img-wrap.is-portrait img{object-fit:contain;max-height:640px;}\n'+'.article-cover{width:100%;display:block}\n'
     +'.article-cover-placeholder{width:100%;height:300px;background:linear-gradient(90deg,#ddd 25%,#eee 50%,#ddd 75%);background-size:600px 100%;border-radius:14px;margin-bottom:8px}\n'
     +'.article-cover-caption{font-size:11px;color:#aaa;text-align:center;margin-bottom:28px;letter-spacing:0.5px}\n'
     +'.article-body{font-size:15px;color:#222;line-height:2;letter-spacing:0.3px;margin-bottom:32px}\n'
