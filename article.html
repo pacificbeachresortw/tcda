@@ -25,14 +25,14 @@
     .article-title{font-size:2rem;font-weight:900;color:#111;line-height:1.35;margin-bottom:16px;letter-spacing:1px}
     .article-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid #ddd;margin-bottom:28px;font-size:12px;color:#888;letter-spacing:1px}
     .article-meta .meta-views{display:flex;align-items:center;gap:4px}
-    .article-cover{width:100%;max-height:480px;object-fit:cover;border-radius:14px;margin-bottom:8px;display:block}
+    .article-cover{width:100%;height:auto;max-height:90vh;object-fit:contain;border-radius:14px;margin-bottom:8px;display:block;background:#111;}
     .article-cover-placeholder{width:100%;height:300px;background:linear-gradient(90deg,#ddd 25%,#eee 50%,#ddd 75%);background-size:600px 100%;border-radius:14px;margin-bottom:8px}
     .article-cover-caption{font-size:11px;color:#aaa;text-align:center;margin-bottom:28px;letter-spacing:0.5px}
     .article-body{font-size:15px;color:#222;line-height:2;letter-spacing:0.3px;margin-bottom:32px}
     .article-body p{margin-bottom:16px}
     .article-images{display:flex;flex-direction:column;gap:24px;margin-bottom:36px}
     .article-img-block{background:#fff;border:1px solid #eee;border-radius:12px;overflow:hidden}
-    .article-img-block img{width:100%;max-height:420px;object-fit:cover;display:block}
+    .article-img-block img{width:100%;height:auto;max-height:90vh;object-fit:contain;display:block;background:#111;}
     .article-img-caption{padding:12px 16px;background:#fafafa;border-top:1px solid #f0f0f0}
     .article-img-caption .caption-text{font-size:13px;color:#444;margin-bottom:4px}
     .article-img-caption .caption-meta{font-size:11px;color:#aaa;letter-spacing:1px;display:flex;gap:12px;flex-wrap:wrap}
@@ -414,11 +414,11 @@ imgObs.observe(document.body, {childList:true, subtree:true});
     img.classList.remove('img-landscape', 'img-portrait');
     if (img.naturalHeight > img.naturalWidth * 1.05) {
       img.classList.add('img-portrait');
-      img.style.maxHeight = '800px';
+      img.style.maxHeight = '90vh';
       img.style.objectFit = 'contain';
     } else {
       img.classList.add('img-landscape');
-      img.style.maxHeight = '520px';
+      img.style.maxHeight = '90vh';
       img.style.objectFit = 'cover';
       img.style.width = '100%';
     }
