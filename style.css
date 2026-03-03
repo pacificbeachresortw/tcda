@@ -37,7 +37,7 @@
   --trans: var(--dur) var(--ease);
 
   --max-w: 1200px;
-  --nav-h: 64px;
+  --nav-h: 76px;
 }
 
 /* ── Reset ── */
@@ -111,13 +111,13 @@ ul, ol { list-style: none; }
   text-decoration: none;
 }
 .logo-name {
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 900;
   color: var(--black);
   letter-spacing: -.4px;
 }
 .logo-sub {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--g400);
   letter-spacing: 1.2px;
@@ -133,7 +133,7 @@ ul, ol { list-style: none; }
 .main-nav a {
   padding: 7px 14px;
   border-radius: var(--r-pill);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--g600);
   white-space: nowrap;
@@ -1301,4 +1301,21 @@ body.splash-done > *:not(.splash):not(.mobile-nav) {
   .article-layout { grid-template-columns: 1fr; }
   body { font-size: 14px; }
   .article-title { font-size: 24px; }
+}
+
+/*  No-image placeholder  */
+.card-img.no-image {
+  background: var(--g100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16/9;
+}
+.card-img.no-image::after {
+  content: '暫無圖片';
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--g400);
+  font-family: var(--font);
+  letter-spacing: .05em;
 }
