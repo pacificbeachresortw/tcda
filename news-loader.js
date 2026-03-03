@@ -1,3 +1,18 @@
+
+// 智慧直/橫式圖片偵測
+window._fitImg = function(img) {
+  function go() {
+    if (!img.naturalWidth) return;
+    var w = img.parentElement;
+    if (!w || !w.classList.contains('smart-img-wrap')) return;
+    if (img.naturalHeight > img.naturalWidth * 1.05) {
+      w.className = 'smart-img-wrap is-portrait';
+    } else {
+      w.className = 'smart-img-wrap is-landscape';
+    }
+  }
+  if (img.complete && img.naturalWidth) { go(); } else { img.onload = go; }
+};
 /**
  * 台灣網路觀察新聞網 TNC — 新聞載入器 v2
  * 修正：escHtml、coverImage 相容、卡片點擊跳轉
@@ -332,7 +347,23 @@ const TCDA_NEWS = (() => {
 
 // 確保無論何時載入都會執行
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => TCDA_NEWS.autoRender());
+  
+  // 注入智慧圖片 CSS（若頁面還沒有）
+  if (!document.getElementById('_smart-img-css')) {
+    var s = document.createElement('style');
+    s.id = '_smart-img-css';
+    s.textContent = [
+      '.smart-img-wrap{width:100%;border-radius:14px;overflow:hidden;background:#f5f5f5;margin-bottom:8px;display:flex;align-items:center;justify-content:center;}',
+      '.smart-img-wrap.is-landscape{max-height:520px;}',
+      '.smart-img-wrap.is-portrait{max-height:700px;background:#111;}',
+      '.smart-img-wrap img{width:100%;display:block;}',
+      '.smart-img-wrap.is-landscape img{object-fit:cover;max-height:520px;}',
+      '.smart-img-wrap.is-portrait img{object-fit:contain;max-height:700px;}',
+    ].join('');
+    document.head.appendChild(s);
+  }
+
+document.addEventListener('DOMContentLoaded', () => TCDA_NEWS.autoRender());
 } else {
   TCDA_NEWS.autoRender();
 }
