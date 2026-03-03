@@ -1,212 +1,191 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>搜尋結果 — 台灣網路觀察新聞網 TNC</title>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    .search-hero{background:#111;border-radius:14px;padding:28px 32px;margin-bottom:28px}
-    .search-hero-form{display:flex;gap:10px;margin-top:16px}
-    .search-hero-input{flex:1;padding:12px 18px;border:1px solid #333;border-radius:8px;background:#222;color:#fff;font-size:14px;font-family:inherit;outline:none}
-    .search-hero-input:focus{border-color:#fff}
-    .search-hero-btn{padding:12px 24px;background:#fff;color:#111;border:none;border-radius:8px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;letter-spacing:1px}
-    .search-hero-btn:hover{background:#ddd}
-    .search-title{font-size:1.1rem;font-weight:900;color:#fff;letter-spacing:3px}
-    .search-keyword{color:#fff;font-style:italic}
-    .search-count{font-size:12px;color:#888;margin-top:8px;letter-spacing:1px}
-    .search-results{display:flex;flex-direction:column;gap:14px}
-    .search-item{background:#fff;border:1px solid #ddd;border-radius:12px;padding:20px;display:flex;gap:16px;cursor:pointer;transition:box-shadow .2s}
-    .search-item:hover{box-shadow:0 6px 20px rgba(0,0,0,.1)}
-    .search-item-img{width:100px;height:80px;object-fit:cover;border-radius:8px;flex-shrink:0}
-    .search-item-img-placeholder{width:100px;height:80px;background:#eee;border-radius:8px;flex-shrink:0}
-    .search-item-body{flex:1;min-width:0}
-    .search-item-cat{font-size:9px;font-weight:800;padding:2px 8px;border-radius:20px;background:#111;color:#fff;letter-spacing:2px;display:inline-block;margin-bottom:6px}
-    .search-item-title{font-size:15px;font-weight:700;color:#111;margin-bottom:6px;line-height:1.4}
-    .search-item-desc{font-size:12px;color:#888;line-height:1.7}
-    .search-item-date{font-size:11px;color:#bbb;margin-top:6px;letter-spacing:1px}
-    .search-empty{text-align:center;padding:60px 24px;color:#bbb;font-size:14px;letter-spacing:2px}
-    .highlight{background:#fff3cd;color:#111;border-radius:2px;padding:0 2px}
-    @media(max-width:600px){.search-item{flex-direction:column}.search-item-img,.search-item-img-placeholder{width:100%;height:160px}}
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>搜尋 — 台灣網路觀察學院 新聞網 TNC</title>
+  <meta name="description" content="搜尋台灣網路觀察學院新聞網 TNC 的所有新聞報導。">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="logo/TCDA (3).png" type="image/png">
 </head>
 <body>
-
-<div class="top-bar">
-  <div class="ticker-wrap">
-    <span class="ticker-label">快訊</span>
-    <div class="ticker-content">
-      <span>目前暫無最新快訊，請持續關注台灣網路觀察新聞網官方頻道。</span>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="site-logo">
+      <span class="logo-name">台灣網路觀察學院</span>
+      <span class="logo-sub">新聞網 TNC</span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">首頁</a>
+      <a href="breaking.html">即時</a>
+      <a href="internet.html">網路</a>
+      <a href="entertainment.html">娛樂</a>
+      <a href="life.html">生活</a>
+      <a href="roblox.html">Roblox</a>
+      <a href="about.html">關於</a>
+    </nav>
+    <div class="header-actions">
+      <a href="search.html" class="icon-btn" aria-label="搜尋">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </a>
+      <a href="submit.html" class="submit-btn">投稿</a>
     </div>
+    <button class="menu-toggle" aria-label="選單" onclick="document.getElementById('mobileNav').classList.toggle('open')">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">🏠 首頁</a>
+  <a href="breaking.html">⚡ 即時新聞</a>
+  <a href="internet.html">🌐 網路</a>
+  <a href="entertainment.html">🎬 娛樂</a>
+  <a href="life.html">☀️ 生活</a>
+  <a href="roblox.html">🎮 Roblox</a>
+  <a href="about.html">ℹ️ 關於我們</a>
+  <a href="submit.html">✏️ 投稿</a>
+</nav>
+
+<div class="search-hero">
+  <div class="container search-box-wrap">
+    <h1>搜尋新聞</h1>
+    <form class="search-form" onsubmit="doSearch(event)">
+      <input type="text" class="search-input" id="searchInput" placeholder="輸入關鍵字..." autocomplete="off">
+      <button type="submit" class="search-submit">搜尋</button>
+    </form>
   </div>
 </div>
 
-<header class="site-header">
-  <div class="header-inner">
-    <div class="logo-area">
-      <div class="site-title-wrap">
-        <h1 class="site-title glow"><a href="index.html" style="text-decoration:none;color:inherit;">台灣網路觀察新聞網 <em class="tcda-em">TNC</em></a></h1>
-        <div class="title-line"></div>
-        <p class="site-subtitle">台灣網路觀察新聞網　官方媒體</p>
-      </div>
-    </div>
-    <div class="header-right">
-      <div class="header-date" id="headerDate"></div>
-      <div class="search-box">
-        <input type="text" id="header-search" placeholder="搜尋新聞" onkeydown="if(event.key==='Enter')doSearch()"/>
-        <button onclick="doSearch()">搜尋</button>
-      </div>
-    </div>
+<div class="container" style="padding-top:40px;padding-bottom:80px;">
+  <div id="searchStatus" style="font-size:14px;color:var(--g500);margin-bottom:24px;font-weight:600;"></div>
+  <div class="cards-grid-2" id="resultsGrid"></div>
+  <div id="noResults" style="display:none;text-align:center;padding:60px 0;">
+    <div style="font-size:48px;margin-bottom:16px;">🔍</div>
+    <h2 style="font-size:20px;font-weight:800;margin-bottom:8px;">找不到相關結果</h2>
+    <p style="font-size:14px;color:var(--g500);">請嘗試其他關鍵字</p>
   </div>
-</header>
-
-<nav class="main-nav">
-  <div class="nav-inner">
-    <ul>
-      <li><a href="index.html">首頁</a></li>
-      <li><a href="breaking.html">即時新聞</a></li>
-      <li><a href="entertainment.html">娛樂</a></li>
-      <li><a href="internet.html">網路</a></li>
-      <li><a href="roblox.html">ROBLOX</a></li>
-      <li><a href="life.html">生活</a></li>
-      <li><a href="about.html">關於我們</a></li>
-    </ul>
-  </div>
-</nav>
-
-<main class="container">
-  <div class="search-hero fade-in">
-    <div class="search-title">搜尋新聞</div>
-    <div class="search-hero-form">
-      <input type="text" class="search-hero-input" id="search-input" placeholder="輸入關鍵字搜尋..." onkeydown="if(event.key==='Enter')runSearch()"/>
-      <button class="search-hero-btn" onclick="runSearch()">搜尋</button>
-    </div>
-    <div class="search-count" id="search-count"></div>
-  </div>
-
-  <div id="search-results"></div>
-</main>
+</div>
 
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-col">
-      <h3 class="glow-sm">台灣網路觀察新聞網 <em class="tcda-em">TNC</em></h3>
-      <p>台灣網路觀察新聞網 官方媒體</p>
-      <p>公正報導，守護真相</p>
-    </div>
-    <div class="footer-col">
-      <h4>快速連結</h4>
-      <ul>
-        <li><a href="index.html">首頁</a></li>
-        <li><a href="breaking.html">即時新聞</a></li>
-        <li><a href="entertainment.html">娛樂</a></li>
-        <li><a href="roblox.html">ROBLOX</a></li>
-        <li><a href="about.html">關於我們</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>聯絡我們</h4>
-      <ul>
-        <li>service@twcda.com</li>
-        <li>Discord：discord.gg/tcda</li>
-        <li>台灣</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>社群媒體</h4>
-      <div class="social-links">
-        <a href="#" class="social-btn">Facebook</a>
-        <a href="#" class="social-btn">Instagram</a>
-        <a href="#" class="social-btn">YouTube</a>
-        <a href="#" class="social-btn">X</a>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="footer-logo-name">台灣網路觀察學院</span>
+          <span class="footer-logo-sub">新聞網 TNC</span>
+        </div>
+        <p class="footer-desc">深度觀察台灣網路生態、科技趨勢與社會時事。</p>
+      </div>
+      <div>
+        <div class="footer-col-title">新聞分類</div>
+        <ul class="footer-links">
+          <li><a href="breaking.html">即時新聞</a></li>
+          <li><a href="internet.html">網路觀察</a></li>
+          <li><a href="entertainment.html">娛樂</a></li>
+          <li><a href="life.html">生活</a></li>
+          <li><a href="roblox.html">Roblox</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">關於我們</div>
+        <ul class="footer-links">
+          <li><a href="about.html">關於 TNC</a></li>
+          <li><a href="submit.html">投稿</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">工具</div>
+        <ul class="footer-links">
+          <li><a href="search.html">搜尋新聞</a></li>
+        </ul>
       </div>
     </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 台灣網路觀察新聞網 TNC &nbsp;|&nbsp; 台灣網路觀察新聞網 版權所有</p>
+    <div class="footer-bottom">
+      <span>© 2025 台灣網路觀察學院新聞網 TNC. All rights reserved.</span>
+      <span>Powered by TNC</span>
+    </div>
   </div>
 </footer>
 
-<script src="tcda-config.js"></script>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到頂部">↑</button>
+<script src="news-loader.js"></script>
 <script>
-function updateDate(){
-  const n=new Date();
-  const el=document.getElementById('headerDate');
-  if(el) el.textContent=n.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'　'+n.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-}
-updateDate(); setInterval(updateDate,1000);
+window.addEventListener('scroll',()=>document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>400));
+document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open')));
 
-const CAT={breaking:'即時',entertainment:'娛樂',internet:'網路',roblox:'ROBLOX',life:'生活'};
-const STORAGE_KEY='tcda_jsonbin_config';
-function getConfig(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{};}catch{return{};}}
+const newsIds=['mm8mbhxvp8mr','mm8meys0c83i','mm8pxo88x0bq','mm8tx9ps1px5'];
+let allArticles=[];
 
-function highlight(text, kw){
-  if(!kw||!text) return text||'';
-  const re=new RegExp('('+kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
-  return text.replace(re,'<span class="highlight">$1</span>');
-}
-
-async function runSearch(){
-  const kw=(document.getElementById('search-input').value||'').trim();
-  if(!kw) return;
-  const countEl=document.getElementById('search-count');
-  const resultsEl=document.getElementById('search-results');
-  countEl.textContent='搜尋中...';
-  resultsEl.innerHTML='';
-
-  const cfg=getConfig();
-  const binId=(window.TCDA_BIN_ID&&window.TCDA_BIN_ID!=='YOUR_BIN_ID_HERE')?window.TCDA_BIN_ID:cfg.binId;
-  if(!binId){countEl.textContent='尚未設定資料來源。';return;}
-
-  try{
-    const h={};if(cfg.masterKey)h['X-Master-Key']=cfg.masterKey;
-    const r=await fetch('https://api.jsonbin.io/v3/b/'+binId+'/latest',{headers:h});
-    if(!r.ok){countEl.textContent='載入失敗。';return;}
-    const j=await r.json();
-    const all=(j.record&&j.record.news)?j.record.news:[];
-    const kl=kw.toLowerCase();
-    const found=all.filter(n=>
-      (n.title&&n.title.toLowerCase().includes(kl))||
-      (n.excerpt&&n.excerpt.toLowerCase().includes(kl))||
-      (n.content&&n.content.toLowerCase().includes(kl))
-    );
-    countEl.textContent='搜尋「'+kw+'」共找到 '+found.length+' 則結果';
-    if(!found.length){
-      resultsEl.innerHTML='<div class="search-empty">找不到包含「'+kw+'」的新聞。</div>';
-      return;
-    }
-    const cover=n=>n.coverImage||(n.images&&n.images[0]?n.images[0].url:'')||'';
-    const fmtDate=iso=>{if(!iso)return'';return new Date(iso).toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'});};
-    resultsEl.innerHTML='<div class="search-results">'+found.map(n=>{
-      const img=cover(n);
-      const imgHTML=img?'<img src="'+img+'" class="search-item-img" loading="lazy">'
-        :'<div class="search-item-img-placeholder"></div>';
-      return '<div class="search-item" onclick="window.location.href=\'news/'+n.id+'.html\'">'
-        +imgHTML
-        +'<div class="search-item-body">'
-        +'<span class="search-item-cat">'+(CAT[n.category]||n.category||'新聞')+'</span>'
-        +'<div class="search-item-title">'+highlight(n.title,kw)+'</div>'
-        +'<div class="search-item-desc">'+highlight((n.excerpt||n.content||'').slice(0,120),kw)+'</div>'
-        +'<div class="search-item-date">'+fmtDate(n.publishedAt)+'</div>'
-        +'</div></div>';
-    }).join('')+'</div>';
-  }catch(e){countEl.textContent='搜尋失敗：'+e.message;}
-}
-
-function doSearch(){
-  const kw=(document.getElementById('header-search').value||'').trim();
-  if(kw) window.location.href='search.html?q='+encodeURIComponent(kw);
-}
-
-// 從 URL 取得關鍵字
-window.addEventListener('DOMContentLoaded',()=>{
-  const params=new URLSearchParams(location.search);
-  const q=params.get('q')||'';
-  if(q){
-    document.getElementById('search-input').value=q;
-    runSearch();
+async function init(){
+  for(const id of newsIds){
+    try{
+      const res=await fetch(`news/${id}.html`);
+      const text=await res.text();
+      const doc=new DOMParser().parseFromString(text,'text/html');
+      allArticles.push({
+        id,
+        title:doc.querySelector('title')?.textContent||'(無標題)',
+        excerpt:doc.querySelector('meta[name="description"]')?.getAttribute('content')||'',
+        image:doc.querySelector('meta[property="og:image"]')?.getAttribute('content')||'',
+        category:doc.querySelector('meta[name="category"]')?.getAttribute('content')||'新聞',
+        date:doc.querySelector('meta[name="date"]')?.getAttribute('content')||'',
+        body:doc.body?.textContent||''
+      });
+    }catch(e){}
   }
-});
+  // Auto-search if URL has query
+  const q=new URLSearchParams(location.search).get('q');
+  if(q){
+    document.getElementById('searchInput').value=q;
+    runSearch(q);
+  }
+}
+
+function doSearch(e){
+  e.preventDefault();
+  const q=document.getElementById('searchInput').value.trim();
+  if(!q) return;
+  history.replaceState(null,'',`?q=${encodeURIComponent(q)}`);
+  runSearch(q);
+}
+
+function runSearch(q){
+  const kw=q.toLowerCase();
+  const results=allArticles.filter(a=>
+    a.title.toLowerCase().includes(kw)||
+    a.excerpt.toLowerCase().includes(kw)||
+    a.body.toLowerCase().includes(kw)||
+    a.category.toLowerCase().includes(kw)
+  );
+  const status=document.getElementById('searchStatus');
+  const grid=document.getElementById('resultsGrid');
+  const noRes=document.getElementById('noResults');
+
+  status.textContent=`搜尋「${q}」，共找到 ${results.length} 篇文章`;
+
+  if(results.length===0){
+    grid.innerHTML='';
+    noRes.style.display='block';
+    return;
+  }
+  noRes.style.display='none';
+  grid.innerHTML=results.map(a=>{
+    const url=`article.html?id=${a.id}`;
+    const img=a.image||'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=70';
+    const date=a.date?new Date(a.date).toLocaleDateString('zh-TW'):'';
+    return `<a href="${url}" class="card">
+      <div class="card-img"><img src="${img}" alt="${a.title}" loading="lazy"></div>
+      <div class="card-body">
+        <div class="card-tags"><span class="tag outline">${a.category}</span></div>
+        <div class="card-title">${a.title}</div>
+        <div class="card-excerpt">${a.excerpt}</div>
+        <div class="card-footer"><span class="card-meta">${date}</span></div>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+init();
 </script>
 </body>
 </html>
