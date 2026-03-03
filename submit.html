@@ -1,167 +1,235 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>投稿 — 台灣網路觀察學院 新聞網 TNC</title>
-  <meta name="description" content="向台灣網路觀察學院新聞網 TNC 投稿，分享您的觀察與報導。">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="logo/TCDA (3).png" type="image/png">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>投稿新聞 — 台灣網路觀察新聞網 TNC</title>
+    <link rel="icon" type="image/png" href="logo/TCDA (3).png"/>
+  <link rel="apple-touch-icon" href="logo/TCDA (3).png"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .submit-hero{background:#111;border-radius:16px;padding:40px 36px;margin-bottom:32px;position:relative;overflow:hidden}
+    .submit-hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,.02) 3px,rgba(255,255,255,.02) 6px);pointer-events:none}
+    .submit-hero-inner{position:relative;z-index:1}
+    .submit-hero-tag{background:#fff;color:#111;font-size:10px;font-weight:900;padding:3px 12px;border-radius:20px;letter-spacing:3px;text-transform:uppercase;display:inline-block;margin-bottom:14px}
+    .submit-hero-title{font-size:2rem;font-weight:900;color:#fff;letter-spacing:4px;margin-bottom:12px}
+    .submit-hero-desc{font-size:13px;color:#888;line-height:1.9;max-width:600px}
+    .submit-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+    .submit-step{background:#fff;border:1px solid #ddd;border-radius:14px;padding:24px 20px;text-align:center}
+    .submit-step-num{width:44px;height:44px;background:#111;color:#fff;border-radius:12px;font-size:1.2rem;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+    .submit-step-title{font-size:13px;font-weight:800;color:#111;letter-spacing:1px;margin-bottom:8px}
+    .submit-step-desc{font-size:12px;color:#888;line-height:1.8}
+    .submit-card{background:#fff;border:1px solid #ddd;border-radius:16px;padding:36px;margin-bottom:24px}
+    .submit-card-title{font-size:14px;font-weight:800;letter-spacing:2px;color:#111;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid #eee}
+    .dc-banner{background:linear-gradient(135deg,#5865f2,#7289da);border-radius:14px;padding:28px 32px;display:flex;align-items:center;gap:24px;margin-bottom:24px;cursor:pointer;transition:opacity .2s}
+    .dc-banner:hover{opacity:.9}
+    .dc-logo{width:56px;height:56px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:28px}
+    .dc-text h3{font-size:1.1rem;font-weight:900;color:#fff;letter-spacing:2px;margin-bottom:6px}
+    .dc-text p{font-size:13px;color:rgba(255,255,255,.8);line-height:1.7}
+    .dc-link{margin-top:10px;display:inline-block;background:rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;padding:6px 16px;border-radius:20px;letter-spacing:1px}
+    .rule-list{list-style:none;padding:0}
+    .rule-list li{padding:12px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#444;line-height:1.8;display:flex;gap:12px;align-items:flex-start}
+    .rule-list li:last-child{border-bottom:none}
+    .rule-num{width:24px;height:24px;background:#111;color:#fff;border-radius:6px;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    .faq-item{margin-bottom:16px;background:#fafafa;border:1px solid #eee;border-radius:10px;padding:16px 18px}
+    .faq-q{font-size:13px;font-weight:800;color:#111;margin-bottom:6px;letter-spacing:0.5px}
+    .faq-a{font-size:12px;color:#777;line-height:1.9}
+    @media(max-width:768px){.submit-steps{grid-template-columns:1fr}.submit-hero-title{font-size:1.5rem}.dc-banner{flex-direction:column;text-align:center}.submit-card{padding:24px 18px}}
+  </style>
 </head>
 <body>
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="index.html" class="site-logo">
-      <span class="logo-name">台灣網路觀察學院</span>
-      <span class="logo-sub">新聞網 TNC</span>
-    </a>
-    <nav class="main-nav">
-      <a href="index.html">首頁</a>
-      <a href="breaking.html">即時</a>
-      <a href="internet.html">網路</a>
-      <a href="entertainment.html">娛樂</a>
-      <a href="life.html">生活</a>
-      <a href="roblox.html">Roblox</a>
-      <a href="about.html">關於</a>
-    </nav>
-    <div class="header-actions">
-      <a href="search.html" class="icon-btn" aria-label="搜尋">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </a>
-      <a href="submit.html" class="submit-btn" style="background:var(--g700);">投稿</a>
+
+<div class="top-bar">
+  <div class="ticker-wrap">
+    <span class="ticker-label">快訊</span>
+    <div class="ticker-content">
+      <span>想要投稿新聞嗎？請加入 TWCDA NEWS 官方 DC 社群：discord.gg/tcda　｜　想要投稿新聞嗎？請加入 TWCDA NEWS 官方 DC 社群：discord.gg/tcda</span>
     </div>
-    <button class="menu-toggle" aria-label="選單" onclick="document.getElementById('mobileNav').classList.toggle('open')">
-      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-    </button>
   </div>
-</header>
-<nav class="mobile-nav" id="mobileNav">
-  <a href="index.html">🏠 首頁</a>
-  <a href="breaking.html">⚡ 即時新聞</a>
-  <a href="internet.html">🌐 網路</a>
-  <a href="entertainment.html">🎬 娛樂</a>
-  <a href="life.html">☀️ 生活</a>
-  <a href="roblox.html">🎮 Roblox</a>
-  <a href="about.html">ℹ️ 關於我們</a>
-  <a href="submit.html">✏️ 投稿</a>
-</nav>
-
-<div class="submit-page">
-  <h1>✏️ 投稿</h1>
-  <p class="page-desc">歡迎向台灣網路觀察學院新聞網 TNC 投稿。請填寫以下表單，我們的編輯團隊將盡快審核您的內容。</p>
-
-  <div id="submitSuccess" style="display:none;padding:20px 24px;background:var(--g50);border:1.5px solid var(--g200);border-radius:var(--r-lg);margin-bottom:32px;">
-    <div style="font-size:32px;margin-bottom:8px;">✅</div>
-    <h2 style="font-size:18px;font-weight:800;margin-bottom:6px;">投稿成功！</h2>
-    <p style="font-size:14px;color:var(--g500);">感謝您的投稿，我們的編輯團隊將盡快審核。</p>
-  </div>
-
-  <form id="submitForm" onsubmit="handleSubmit(event)">
-    <div class="form-group">
-      <label class="form-label" for="submitTitle">文章標題 <span style="color:var(--g400);">*</span></label>
-      <input type="text" class="form-input" id="submitTitle" name="title" placeholder="請輸入文章標題" required>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label" for="submitCategory">分類 <span style="color:var(--g400);">*</span></label>
-      <select class="form-select" id="submitCategory" name="category" required>
-        <option value="">請選擇分類</option>
-        <option value="breaking">⚡ 即時新聞</option>
-        <option value="internet">🌐 網路觀察</option>
-        <option value="entertainment">🎬 娛樂</option>
-        <option value="life">☀️ 生活</option>
-        <option value="roblox">🎮 Roblox</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label" for="submitContent">文章內容 <span style="color:var(--g400);">*</span></label>
-      <textarea class="form-textarea" id="submitContent" name="content" placeholder="請輸入文章內容（至少 100 字）..." required style="min-height:200px;"></textarea>
-      <div class="form-hint">請提供完整的報導內容，包含事件背景、相關資訊等。</div>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label" for="submitSource">資料來源</label>
-      <input type="text" class="form-input" id="submitSource" name="source" placeholder="請輸入資料來源網址或說明">
-      <div class="form-hint">請標明資訊來源，有助於我們進行查核。</div>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label" for="submitAuthor">投稿者名稱</label>
-      <input type="text" class="form-input" id="submitAuthor" name="author" placeholder="您的名字或匿稱（選填）">
-    </div>
-
-    <div class="form-group">
-      <label class="form-label" for="submitEmail">聯絡信箱</label>
-      <input type="email" class="form-input" id="submitEmail" name="email" placeholder="your@email.com（選填）">
-      <div class="form-hint">我們可能會透過此信箱與您聯絡，但不會公開顯示。</div>
-    </div>
-
-    <div style="padding:16px;background:var(--g50);border-radius:var(--r-md);border:1.5px solid var(--g200);margin-bottom:24px;font-size:13px;color:var(--g500);line-height:1.7;">
-      ℹ️ 提交即表示您同意 TNC 擁有對該內容進行編輯、發佈或拒絕的權利。我們保護您的個人資訊，不會在未經同意的情況下公開。
-    </div>
-
-    <button type="submit" class="form-submit">提交投稿</button>
-  </form>
 </div>
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <span class="footer-logo-name">台灣網路觀察學院</span>
-          <span class="footer-logo-sub">新聞網 TNC</span>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="site-title-wrap">
+        <h1 class="site-title glow"><a href="index.html" style="text-decoration:none;color:inherit;">台灣網路觀察新聞網 <em class="tcda-em">TNC</em></a></h1>
+        <div class="title-line"></div>
+        <p class="site-subtitle">台灣網路觀察新聞網　官方媒體</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-date" id="headerDate"></div>
+      <div class="search-box">
+        <input type="text" id="main-search" placeholder="搜尋新聞" onkeydown="if(event.key==='Enter'){var q=this.value.trim();if(q)window.location.href='search.html?q='+encodeURIComponent(q);}"/>
+        <button onclick="var q=document.getElementById('main-search').value.trim();if(q)window.location.href='search.html?q='+encodeURIComponent(q);">搜尋</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="main-nav">
+  <div class="nav-inner">
+    <ul>
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="breaking.html">即時新聞</a></li>
+      <li><a href="entertainment.html">娛樂</a></li>
+      <li><a href="internet.html">網路</a></li>
+      <li><a href="roblox.html">ROBLOX</a></li>
+      <li><a href="life.html">生活</a></li>
+      <li><a href="about.html">關於我們</a></li>
+      <li class="active"><a href="submit.html">投稿新聞</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+
+  <section class="submit-hero fade-in">
+    <div class="submit-hero-inner">
+      <span class="submit-hero-tag">投稿</span>
+      <h2 class="submit-hero-title">新聞投稿專區</h2>
+      <p class="submit-hero-desc">你也能成為 <em class="tcda-em">TNC</em> 的一員！將你發現的新聞、事件、社群動態投稿給我們，由編輯審核後發布至官方媒體。</p>
+    </div>
+  </section>
+
+  <div class="submit-steps fade-in" style="animation-delay:0.1s">
+    <div class="submit-step anim-card">
+      <div class="submit-step-num">1</div>
+      <div class="submit-step-title">加入 Discord</div>
+      <div class="submit-step-desc">加入 TWCDA NEWS 官方 Discord 社群，進入投稿頻道。</div>
+    </div>
+    <div class="submit-step anim-card" style="animation-delay:0.05s">
+      <div class="submit-step-num">2</div>
+      <div class="submit-step-title">填寫投稿資訊</div>
+      <div class="submit-step-desc">提供新聞標題、內容、相關連結或截圖，以及你的資訊來源。</div>
+    </div>
+    <div class="submit-step anim-card" style="animation-delay:0.1s">
+      <div class="submit-step-num">3</div>
+      <div class="submit-step-title">等待審核發布</div>
+      <div class="submit-step-desc">編輯團隊審核後，符合規範的新聞將發布至官方媒體頁面。</div>
+    </div>
+  </div>
+
+  <div class="content-sidebar-wrap">
+    <div class="main-content">
+
+      <div class="submit-card fade-in" style="animation-delay:0.15s">
+        <div class="submit-card-title">立即加入 Discord 投稿</div>
+        <a class="dc-banner" href="https://discord.gg/tcda" target="_blank" rel="noopener">
+          <div class="dc-logo">💬</div>
+          <div class="dc-text">
+            <h3>TWCDA NEWS 官方社群</h3>
+            <p>加入我們的 Discord 伺服器，在投稿頻道提交你的新聞線索。<br>我們的編輯團隊會盡快審核並回覆。</p>
+            <span class="dc-link">discord.gg/tcda　→ 立即加入</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="submit-card fade-in" style="animation-delay:0.2s">
+        <div class="submit-card-title">投稿規範</div>
+        <ul class="rule-list">
+          <li><span class="rule-num">1</span>投稿內容必須真實，請提供可驗證的資料來源（連結、截圖等）。</li>
+          <li><span class="rule-num">2</span>不得投稿未經授權的個人隱私資訊或造謠內容。</li>
+          <li><span class="rule-num">3</span>投稿時請標明新聞分類（即時／娛樂／網路／ROBLOX／生活）。</li>
+          <li><span class="rule-num">4</span>圖片請確認有使用權，或標明出處與版權資訊。</li>
+          <li><span class="rule-num">5</span>編輯保留對稿件進行修改、補充或拒絕發布的權利。</li>
+          <li><span class="rule-num">6</span>重複投稿或刷頻者將被取消投稿資格。</li>
+        </ul>
+      </div>
+
+      <div class="submit-card fade-in" style="animation-delay:0.25s">
+        <div class="submit-card-title">常見問題</div>
+        <div class="faq-item">
+          <div class="faq-q">投稿後多久會被發布？</div>
+          <div class="faq-a">編輯團隊通常在 24 小時內審核。緊急新聞線索可在 Discord 標記編輯人員加速處理。</div>
         </div>
-        <p class="footer-desc">深度觀察台灣網路生態、科技趨勢與社會時事。</p>
+        <div class="faq-item">
+          <div class="faq-q">投稿者會被標名嗎？</div>
+          <div class="faq-a">預設不公開投稿者身份。如希望在文章中被標記為「特約記者」或「線人」，請在投稿時說明。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">投稿一定要有圖片嗎？</div>
+          <div class="faq-a">圖片非必要，但附上相關截圖或圖片能加快審核速度，也讓報導更完整。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">什麼樣的內容不會被採用？</div>
+          <div class="faq-a">純粹的意見文章、未有依據的謠言、廣告或商業推廣內容，以及與 TNC 媒體定位不符的內容。</div>
+        </div>
       </div>
-      <div>
-        <div class="footer-col-title">新聞分類</div>
-        <ul class="footer-links">
-          <li><a href="breaking.html">即時新聞</a></li>
-          <li><a href="internet.html">網路觀察</a></li>
-          <li><a href="entertainment.html">娛樂</a></li>
-          <li><a href="life.html">生活</a></li>
-          <li><a href="roblox.html">Roblox</a></li>
-        </ul>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-widget fade-in" style="animation-delay:0.2s">
+        <div class="widget-title">投稿管道</div>
+        <div class="about-body">
+          <div style="text-align:center;margin-bottom:14px">
+            <a href="https://discord.gg/tcda" target="_blank" style="display:inline-block;background:#5865f2;color:#fff;font-size:12px;font-weight:800;padding:10px 24px;border-radius:20px;letter-spacing:1px;text-decoration:none">加入 Discord</a>
+          </div>
+          <p class="about-text">Discord 是目前唯一接受投稿的管道，請進入伺服器後至「投稿頻道」提交。</p>
+        </div>
       </div>
-      <div>
-        <div class="footer-col-title">關於我們</div>
-        <ul class="footer-links">
-          <li><a href="about.html">關於 TNC</a></li>
-          <li><a href="submit.html">投稿</a></li>
-        </ul>
+      <div class="sidebar-widget fade-in" style="animation-delay:0.3s">
+        <div class="widget-title">聯絡編輯</div>
+        <div class="about-body">
+          <p class="about-text">一般問題：service@twcda.com<br><br>緊急新聞線索請直接在 Discord 標記編輯人員。</p>
+        </div>
       </div>
-      <div>
-        <div class="footer-col-title">工具</div>
-        <ul class="footer-links">
-          <li><a href="search.html">搜尋新聞</a></li>
-        </ul>
+    </aside>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h3 class="glow-sm">台灣網路觀察新聞網 <em class="tcda-em">TNC</em></h3>
+      <p>台灣網路觀察新聞網 官方媒體</p>
+      <p>公正報導，守護真相</p>
+    </div>
+    <div class="footer-col">
+      <h4>快速連結</h4>
+      <ul>
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="breaking.html">即時新聞</a></li>
+        <li><a href="entertainment.html">娛樂</a></li>
+        <li><a href="roblox.html">ROBLOX</a></li>
+        <li><a href="about.html">關於我們</a></li>
+        <li><a href="submit.html">投稿新聞</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>聯絡我們</h4>
+      <ul>
+        <li>service@twcda.com</li>
+        <li>Discord：discord.gg/tcda</li>
+        <li>台灣</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>社群媒體</h4>
+      <div class="social-links">
+        <a href="#" class="social-btn">Facebook</a>
+        <a href="#" class="social-btn">Instagram</a>
+        <a href="#" class="social-btn">YouTube</a>
+        <a href="#" class="social-btn">X</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2025 台灣網路觀察學院新聞網 TNC. All rights reserved.</span>
-      <span>Powered by TNC</span>
-    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 台灣網路觀察新聞網 TNC &nbsp;|&nbsp; 台灣網路觀察新聞網 版權所有</p>
   </div>
 </footer>
 
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到頂部">↑</button>
 <script>
-window.addEventListener('scroll',()=>document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>400));
-document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open')));
-
-function handleSubmit(e){
-  e.preventDefault();
-  const btn=e.target.querySelector('.form-submit');
-  btn.textContent='提交中...';
-  btn.disabled=true;
-  setTimeout(()=>{
-    document.getElementById('submitForm').style.display='none';
-    document.getElementById('submitSuccess').style.display='block';
-    window.scrollTo({top:0,behavior:'smooth'});
-  },1200);
+function updateDate(){
+  const n=new Date();
+  const el=document.getElementById('headerDate');
+  if(el) el.textContent=n.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'　'+n.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
 }
+updateDate(); setInterval(updateDate,1000);
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+document.querySelectorAll('.fade-in,.anim-card').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>

@@ -1,177 +1,278 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>即時新聞 — 台灣網路觀察學院 新聞網 TNC</title>
-  <meta name="description" content="台灣網路觀察學院新聞網 TNC 即時新聞，第一時間掌握台灣最新動態。">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="logo/TCDA (3).png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>即時新聞 — 台灣網路觀察新聞網 TNC</title>
+  <link rel="icon" type="image/png" href="logo/TCDA (3).png"/>
+  <link rel="apple-touch-icon" href="logo/TCDA (3).png"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="index.html" class="site-logo">
-      <span class="logo-name">台灣網路觀察學院</span>
-      <span class="logo-sub">新聞網 TNC</span>
-    </a>
-    <nav class="main-nav">
-      <a href="index.html">首頁</a>
-      <a href="breaking.html" class="active">即時</a>
-      <a href="internet.html">網路</a>
-      <a href="entertainment.html">娛樂</a>
-      <a href="life.html">生活</a>
-      <a href="roblox.html">Roblox</a>
-      <a href="about.html">關於</a>
-    </nav>
-    <div class="header-actions">
-      <a href="search.html" class="icon-btn" aria-label="搜尋">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </a>
-      <a href="submit.html" class="submit-btn">投稿</a>
-    </div>
-    <button class="menu-toggle" aria-label="選單" onclick="document.getElementById('mobileNav').classList.toggle('open')">
-      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-    </button>
-  </div>
-</header>
-<nav class="mobile-nav" id="mobileNav">
-  <a href="index.html">🏠 首頁</a>
-  <a href="breaking.html">⚡ 即時新聞</a>
-  <a href="internet.html">🌐 網路</a>
-  <a href="entertainment.html">🎬 娛樂</a>
-  <a href="life.html">☀️ 生活</a>
-  <a href="roblox.html">🎮 Roblox</a>
-  <a href="about.html">ℹ️ 關於我們</a>
-  <a href="submit.html">✏️ 投稿</a>
-</nav>
-
-<div class="page-hero">
-  <div class="container page-hero-inner">
-    <span class="page-hero-label">⚡ BREAKING</span>
-    <h1 class="page-hero-title">即時新聞</h1>
-    <p class="page-hero-desc">第一時間掌握台灣最新動態，不錯過任何重要事件。</p>
-  </div>
-</div>
-
-<div class="container" style="padding-top:40px;padding-bottom:80px;">
-  <div class="main-layout">
-    <main>
-      <div class="cards-grid-2" id="newsGrid">
-        <div class="card"><div class="card-img skeleton skeleton-img"></div><div class="card-body"><div class="skeleton skeleton-line medium"></div><div class="skeleton skeleton-line short"></div></div></div>
-        <div class="card"><div class="card-img skeleton skeleton-img"></div><div class="card-body"><div class="skeleton skeleton-line medium"></div><div class="skeleton skeleton-line short"></div></div></div>
-        <div class="card"><div class="card-img skeleton skeleton-img"></div><div class="card-body"><div class="skeleton skeleton-line medium"></div><div class="skeleton skeleton-line short"></div></div></div>
-        <div class="card"><div class="card-img skeleton skeleton-img"></div><div class="card-body"><div class="skeleton skeleton-line medium"></div><div class="skeleton skeleton-line short"></div></div></div>
+  <div class="top-bar">
+    <div class="ticker-wrap">
+      <span class="ticker-label">快訊</span>
+      <div class="ticker-content">
+        <span>目前暫無最新快訊，請持續關注台灣網路觀察新聞網官方頻道。</span>
       </div>
-    </main>
-    <aside class="sidebar">
-      <div class="sidebar-sticky">
-        <div class="widget">
-          <h3 class="widget-title">📂 其他分類</h3>
-          <div class="tags-cloud">
-            <a href="internet.html">🌐 網路</a>
-            <a href="entertainment.html">🎬 娛樂</a>
-            <a href="life.html">☀️ 生活</a>
-            <a href="roblox.html">🎮 Roblox</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <div class="site-title-wrap">
+          <h1 class="site-title glow"><a href="index.html" style="text-decoration:none;color:inherit;">台灣網路觀察新聞網 <em class="tcda-em">TNC</em></a></h1>
+          <div class="title-line"></div>
+          <p class="site-subtitle">台灣網路觀察新聞網　官方媒體</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="header-date" id="headerDate"></div>
+        <div class="search-box">
+          <input type="text" placeholder="搜尋新聞" />
+          <button>搜尋</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <ul>
+        <li><a href="index.html">首頁</a></li>
+        <li class="active"><a href="breaking.html">即時新聞</a></li>
+        <li><a href="entertainment.html">娛樂</a></li>
+        <li><a href="internet.html">網路</a></li>
+        <li><a href="roblox.html">ROBLOX</a></li>
+        <li><a href="life.html">生活</a></li>
+        <li><a href="about.html">關於我們</a></li>
+        <li><a href="submit.html">投稿新聞</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- 頁面標題 -->
+    <section class="page-hero fade-in">
+      <div class="page-hero-inner">
+        <span class="page-hero-tag">即時</span>
+        <h2 class="page-hero-title">即時新聞</h2>
+        <p class="page-hero-desc">最快速、最即時的新聞資訊，台灣網路觀察新聞網 <em class="tcda-em">TNC</em> 為您第一時間掌握動態。</p>
+      </div>
+    </section>
+
+    <div class="content-sidebar-wrap">
+      <div class="main-content">
+
+        <!-- 即時新聞列表 -->
+        <section class="section-block fade-in">
+          <div class="section-title">
+            <span class="label">最新消息</span>
+          </div>
+          <ul class="breaking-list">
+            <li class="breaking-item anim-card" style="animation-delay:0.05s">
+              <span class="breaking-dot"></span>
+              <div class="breaking-body">
+                <span class="breaking-time">--:--</span>
+                <span class="breaking-tag-badge">即時</span>
+                <span class="breaking-text">暫無新聞</span>
+              </div>
+            </li>
+            <li class="breaking-item anim-card" style="animation-delay:0.1s">
+              <span class="breaking-dot"></span>
+              <div class="breaking-body">
+                <span class="breaking-time">--:--</span>
+                <span class="breaking-tag-badge">即時</span>
+                <span class="breaking-text">暫無新聞</span>
+              </div>
+            </li>
+            <li class="breaking-item anim-card" style="animation-delay:0.15s">
+              <span class="breaking-dot"></span>
+              <div class="breaking-body">
+                <span class="breaking-time">--:--</span>
+                <span class="breaking-tag-badge">即時</span>
+                <span class="breaking-text">暫無新聞</span>
+              </div>
+            </li>
+            <li class="breaking-item anim-card" style="animation-delay:0.2s">
+              <span class="breaking-dot"></span>
+              <div class="breaking-body">
+                <span class="breaking-time">--:--</span>
+                <span class="breaking-tag-badge">即時</span>
+                <span class="breaking-text">暫無新聞</span>
+              </div>
+            </li>
+            <li class="breaking-item anim-card" style="animation-delay:0.25s">
+              <span class="breaking-dot"></span>
+              <div class="breaking-body">
+                <span class="breaking-time">--:--</span>
+                <span class="breaking-tag-badge">即時</span>
+                <span class="breaking-text">暫無新聞</span>
+              </div>
+            </li>
+            <li class="breaking-item anim-card" style="animation-delay:0.3s">
+              <span class="breaking-dot"></span>
+              <div class="breaking-body">
+                <span class="breaking-time">--:--</span>
+                <span class="breaking-tag-badge">即時</span>
+                <span class="breaking-text">暫無新聞</span>
+              </div>
+            </li>
+            <li class="breaking-item anim-card" style="animation-delay:0.35s">
+              <span class="breaking-dot"></span>
+              <div class="breaking-body">
+                <span class="breaking-time">--:--</span>
+                <span class="breaking-tag-badge">即時</span>
+                <span class="breaking-text">暫無新聞</span>
+              </div>
+            </li>
+            <li class="breaking-item anim-card" style="animation-delay:0.4s">
+              <span class="breaking-dot"></span>
+              <div class="breaking-body">
+                <span class="breaking-time">--:--</span>
+                <span class="breaking-tag-badge">即時</span>
+                <span class="breaking-text">暫無新聞</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 今日頭條 -->
+        <section class="section-block fade-in" style="animation-delay:0.1s">
+          <div class="section-title">
+            <span class="label">今日頭條</span>
+          </div>
+          <div class="card-grid">
+            <div class="news-card anim-card" style="animation-delay:0.05s">
+              <div class="card-img-placeholder"></div>
+              <div class="card-body">
+                <span class="cat-tag">即時</span>
+                <p class="no-news">暫無新聞</p>
+                <p class="card-desc">目前此分類暫無相關報導。</p>
+              </div>
+            </div>
+            <div class="news-card anim-card" style="animation-delay:0.1s">
+              <div class="card-img-placeholder"></div>
+              <div class="card-body">
+                <span class="cat-tag">即時</span>
+                <p class="no-news">暫無新聞</p>
+                <p class="card-desc">目前此分類暫無相關報導。</p>
+              </div>
+            </div>
+            <div class="news-card anim-card" style="animation-delay:0.15s">
+              <div class="card-img-placeholder"></div>
+              <div class="card-body">
+                <span class="cat-tag">即時</span>
+                <p class="no-news">暫無新聞</p>
+                <p class="card-desc">目前此分類暫無相關報導。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- 側邊欄 -->
+      <aside class="sidebar">
+
+        <div class="sidebar-widget fade-in" style="animation-delay:0.2s">
+          <div class="widget-title">熱門新聞</div>
+          <ul class="hot-list">
+            <li><span class="rank rank1">01</span><span class="no-news-inline">暫無新聞</span></li>
+            <li><span class="rank rank2">02</span><span class="no-news-inline">暫無新聞</span></li>
+            <li><span class="rank rank3">03</span><span class="no-news-inline">暫無新聞</span></li>
+            <li><span class="rank">04</span><span class="no-news-inline">暫無新聞</span></li>
+            <li><span class="rank">05</span><span class="no-news-inline">暫無新聞</span></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-widget fade-in" style="animation-delay:0.3s">
+          <div class="widget-title">新聞分類</div>
+          <ul class="cat-list">
+            <li><a href="entertainment.html">娛樂 <span class="count">0</span></a></li>
+            <li><a href="internet.html">網路 <span class="count">0</span></a></li>
+            <li><a href="roblox.html">ROBLOX <span class="count">0</span></a></li>
+            <li><a href="life.html">生活 <span class="count">0</span></a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-widget about-widget fade-in" style="animation-delay:0.4s">
+          <div class="widget-title">關於我們</div>
+          <div class="about-body">
+            <div class="about-logo glow-sm">台灣網路觀察新聞網</div>
+            <p class="about-text">台灣網路觀察新聞網 官方媒體，致力於報導真實、公正、有深度的新聞資訊，拒絕屁孩文化，守護台灣媒體正義。</p>
           </div>
         </div>
-        <div class="widget">
-          <h3 class="widget-title">ℹ️ 關於 TNC</h3>
-          <p style="font-size:13px;color:var(--g500);line-height:1.7;">台灣網路觀察學院新聞網（TNC）深度觀察台灣網路生態，提供獨立報導。</p>
-          <a href="about.html" style="display:inline-block;margin-top:14px;padding:7px 18px;border-radius:var(--r-pill);border:1.5px solid var(--g200);font-size:13px;font-weight:700;color:var(--g600);">了解更多</a>
-        </div>
-      </div>
-    </aside>
-  </div>
-</div>
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <span class="footer-logo-name">台灣網路觀察學院</span>
-          <span class="footer-logo-sub">新聞網 TNC</span>
-        </div>
-        <p class="footer-desc">深度觀察台灣網路生態、科技趨勢與社會時事。</p>
+      </aside>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h3 class="glow-sm">台灣網路觀察新聞網 <em class="tcda-em">TNC</em></h3>
+        <p>台灣網路觀察新聞網 官方媒體</p>
+        <p>公正報導，守護真相</p>
       </div>
-      <div>
-        <div class="footer-col-title">新聞分類</div>
-        <ul class="footer-links">
+      <div class="footer-col">
+        <h4>快速連結</h4>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
           <li><a href="breaking.html">即時新聞</a></li>
-          <li><a href="internet.html">網路觀察</a></li>
           <li><a href="entertainment.html">娛樂</a></li>
-          <li><a href="life.html">生活</a></li>
-          <li><a href="roblox.html">Roblox</a></li>
+          <li><a href="roblox.html">ROBLOX</a></li>
+          <li><a href="about.html">關於我們</a></li>
         </ul>
       </div>
-      <div>
-        <div class="footer-col-title">關於我們</div>
-        <ul class="footer-links">
-          <li><a href="about.html">關於 TNC</a></li>
-          <li><a href="submit.html">投稿</a></li>
+      <div class="footer-col">
+        <h4>聯絡我們</h4>
+        <ul>
+          <li>service@twcda.com</li>
+          <li>Discord：discord.gg/tcda</li>
+          <li>台灣</li>
         </ul>
       </div>
-      <div>
-        <div class="footer-col-title">工具</div>
-        <ul class="footer-links">
-          <li><a href="search.html">搜尋新聞</a></li>
-        </ul>
+      <div class="footer-col">
+        <h4>社群媒體</h4>
+        <div class="social-links">
+          <a href="#" class="social-btn">Facebook</a>
+          <a href="#" class="social-btn">Instagram</a>
+          <a href="#" class="social-btn">YouTube</a>
+          <a href="#" class="social-btn">X</a>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 台灣網路觀察學院新聞網 TNC. All rights reserved.</span>
-      <span>Powered by TNC</span>
+      <p>&copy; 2026 台灣網路觀察新聞網 TNC &nbsp;|&nbsp; 台灣網路觀察新聞網 版權所有 &nbsp;|&nbsp; <a href="#">隱私政策</a> &nbsp;|&nbsp; <a href="#">服務條款</a></p>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到頂部">↑</button>
-<script src="news-loader.js"></script>
-<script>
-window.addEventListener('scroll',()=>document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>400));
-document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open')));
+  <script>
+    function updateDate() {
+      const now = new Date();
+      const opt = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+      const d = now.toLocaleDateString('zh-TW', opt);
+      const t = now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const el = document.getElementById('headerDate');
+      if (el) el.textContent = d + '　' + t;
+    }
+    updateDate();
+    setInterval(updateDate, 1000);
 
-const newsIds = ['mm8mbhxvp8mr','mm8meys0c83i','mm8pxo88x0bq','mm8tx9ps1px5'];
-async function loadPage() {
-  const articles = [];
-  for (const id of newsIds) {
-    try {
-      const res = await fetch(`news/${id}.html`);
-      const text = await res.text();
-      const doc = new DOMParser().parseFromString(text,'text/html');
-      articles.push({
-        id,
-        title: doc.querySelector('title')?.textContent || doc.querySelector('h1')?.textContent || '(無標題)',
-        excerpt: doc.querySelector('meta[name="description"]')?.getAttribute('content') || '',
-        image: doc.querySelector('meta[property="og:image"]')?.getAttribute('content') || doc.querySelector('img')?.getAttribute('src') || '',
-        category: doc.querySelector('meta[name="category"]')?.getAttribute('content') || '即時',
-        date: doc.querySelector('meta[name="date"]')?.getAttribute('content') || ''
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
       });
-    } catch(e) {}
-  }
-  const grid = document.getElementById('newsGrid');
-  if (articles.length > 0) {
-    grid.innerHTML = articles.map(a => {
-      const url = `article.html?id=${a.id}`;
-      const img = a.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=70';
-      const date = a.date ? new Date(a.date).toLocaleDateString('zh-TW') : '';
-      return `<a href="${url}" class="card">
-        <div class="card-img${noImg}"><img src="${img}" alt="${a.title}" loading="lazy"></div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag outline">${a.category}</span></div>
-          <div class="card-title">${a.title}</div>
-          <div class="card-excerpt">${a.excerpt}</div>
-          <div class="card-footer">
-            <span class="card-meta">${date}</span>
-          </div>
-        </div>
-      </a>`;
-    }).join('');
-  }
-}
-loadPage();
-</script>
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in, .anim-card').forEach(el => observer.observe(el));
+    window._tcdaObserver = observer;
+  </script>
+  <script src="tcda-config.js"></script>
+  <script src="news-loader.js"></script>
 </body>
 </html>
